@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Progamins — Full-Stack Developer</title>
-  <meta name="description" content="Portfolio de Progamins, desarrollador full-stack de Perú. Productos web, APIs, móvil y experimentos.">
+  <title>Progamins — Full-Stack Developer · Vibe Coder</title>
+  <meta name="description" content="Portfolio de Progamins, desarrollador full-stack que construye con IA. Productos web, APIs, móvil y experimentos.">
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/143522546?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #0a0f1e;
       --bg-soft: #0e1526;
       --surface: rgba(255, 255, 255, 0.04);
+      --surface-hover: rgba(255, 255, 255, 0.07);
       --border: rgba(255, 255, 255, 0.09);
       --text: #e2e8f0;
       --muted: #94a3b8;
@@ -20,18 +22,21 @@
       --cyan: #22d3ee;
       --magenta: #ec4899;
       --grad: linear-gradient(90deg, var(--violet), var(--cyan) 55%, var(--magenta));
+      --shadow: 0 20px 60px -20px rgba(139, 92, 246, 0.4);
     }
     @media (prefers-color-scheme: light) {
       :root {
         --bg: #f8fafc;
         --bg-soft: #f1f5f9;
         --surface: #ffffff;
+        --surface-hover: #ffffff;
         --border: rgba(15, 23, 42, 0.12);
         --text: #0f172a;
         --muted: #475569;
         --violet: #7c3aed;
         --cyan: #0891b2;
         --magenta: #db2777;
+        --shadow: 0 20px 50px -20px rgba(124, 58, 237, 0.25);
       }
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -44,86 +49,135 @@
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background:
-        radial-gradient(600px 300px at 15% -5%, rgba(139, 92, 246, 0.16), transparent 60%),
-        radial-gradient(600px 300px at 85% 10%, rgba(34, 211, 238, 0.12), transparent 60%),
-        radial-gradient(500px 300px at 50% 110%, rgba(236, 72, 153, 0.10), transparent 60%);
+    ::selection { background: rgba(139, 92, 246, 0.4); }
+
+    /* Fondo: orbes animados + rejilla */
+    .bg { position: fixed; inset: 0; z-index: -2; overflow: hidden; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.5; }
+    .orb-1 { width: 480px; height: 480px; top: -160px; left: -120px; background: var(--violet); animation: drift 16s ease-in-out infinite alternate; }
+    .orb-2 { width: 420px; height: 420px; top: 20%; right: -140px; background: var(--cyan); opacity: 0.35; animation: drift 20s ease-in-out infinite alternate-reverse; }
+    .orb-3 { width: 380px; height: 380px; bottom: -140px; left: 30%; background: var(--magenta); opacity: 0.28; animation: drift 24s ease-in-out infinite alternate; }
+    @keyframes drift { from { transform: translate(0, 0) scale(1); } to { transform: translate(60px, 40px) scale(1.15); } }
+    .grid-overlay {
+      position: fixed; inset: 0; z-index: -1;
+      background-image: linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
     }
     a { color: var(--cyan); text-decoration: none; }
     a:hover { text-decoration: underline; }
     .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+    section { scroll-margin-top: 76px; }
 
     /* ---------- Nav ---------- */
     nav {
       position: sticky; top: 0; z-index: 50;
-      background: color-mix(in srgb, var(--bg) 82%, transparent);
-      backdrop-filter: blur(12px);
+      background: color-mix(in srgb, var(--bg) 78%, transparent);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
     nav .container { display: flex; align-items: center; justify-content: space-between; height: 60px; }
-    .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.1rem; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    nav ul { display: flex; gap: 24px; list-style: none; }
-    nav ul a { color: var(--muted); font-size: 0.9rem; font-weight: 500; }
+    .logo {
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.15rem;
+      background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+      background-size: 200% auto;
+      animation: shimmer 6s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: 200% center; } }
+    nav ul { display: flex; gap: 26px; list-style: none; }
+    nav ul a { color: var(--muted); font-size: 0.9rem; font-weight: 500; transition: color 0.15s; }
     nav ul a:hover { color: var(--text); text-decoration: none; }
 
     /* ---------- Hero ---------- */
-    .hero { text-align: center; padding: 96px 0 72px; }
+    .hero { text-align: center; padding: 100px 0 76px; position: relative; }
     .avatar-ring {
-      width: 108px; height: 108px; border-radius: 50%;
+      width: 116px; height: 116px; border-radius: 50%;
       background: var(--grad); padding: 3px;
-      margin: 0 auto 24px;
+      margin: 0 auto 26px;
+      box-shadow: 0 0 40px -8px rgba(139, 92, 246, 0.55);
+      animation: float 5s ease-in-out infinite;
     }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
     .avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
+    .badge-ai {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em;
+      color: var(--text);
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 6px 16px; border-radius: 999px;
+      margin-bottom: 22px;
+    }
+    .badge-ai .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--magenta); box-shadow: 0 0 10px var(--magenta);
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     .hero h1 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.6rem, 7vw, 4.2rem);
-      font-weight: 700; letter-spacing: -0.02em;
+      font-size: clamp(2.8rem, 8vw, 4.6rem);
+      font-weight: 700; letter-spacing: -0.02em; line-height: 1.05;
       background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+      background-size: 200% auto;
+      animation: shimmer 7s linear infinite;
     }
-    .hero .role { margin-top: 12px; font-size: 1.15rem; color: var(--muted); }
+    .hero .role { margin-top: 14px; font-size: 1.15rem; color: var(--muted); }
     .hero .role b { color: var(--text); }
-    .hero .tagline { margin-top: 8px; font-style: italic; color: var(--muted); }
-    .cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+    .hero .tagline { margin-top: 10px; font-style: italic; color: var(--muted); }
+    .hero .ai-note {
+      max-width: 560px; margin: 22px auto 0;
+      font-size: 0.95rem; color: var(--muted);
+    }
+    .cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 34px; }
     .btn {
-      display: inline-block; padding: 12px 22px; border-radius: 999px;
-      font-weight: 600; font-size: 0.95rem; transition: transform 0.15s ease, box-shadow 0.15s ease;
+      display: inline-block; padding: 12px 24px; border-radius: 999px;
+      font-weight: 600; font-size: 0.95rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s;
     }
     .btn:hover { transform: translateY(-2px); text-decoration: none; }
-    .btn-primary { background: var(--grad); color: #fff; box-shadow: 0 8px 24px rgba(139, 92, 246, 0.35); }
+    .btn-primary { background: var(--grad); color: #fff; box-shadow: 0 8px 28px rgba(139, 92, 246, 0.4); }
+    .btn-primary:hover { box-shadow: var(--shadow); }
     .btn-ghost { border: 1px solid var(--border); color: var(--text); background: var(--surface); }
+    .btn-ghost:hover { background: var(--surface-hover); }
 
     /* ---------- Sections ---------- */
-    section { padding: 64px 0; }
+    section { padding: 68px 0; }
     .section-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.6rem; font-weight: 700; margin-bottom: 8px;
+      font-size: 1.65rem; font-weight: 700; margin-bottom: 8px;
     }
-    .section-sub { color: var(--muted); margin-bottom: 36px; max-width: 640px; }
+    .section-sub { color: var(--muted); margin-bottom: 38px; max-width: 640px; }
 
-    .about-card {
+    .about-card, .ai-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 16px; padding: 28px;
     }
     .about-card p + p { margin-top: 12px; }
+    .ai-card {
+      border-left: 3px solid var(--violet);
+      background: linear-gradient(135deg, var(--surface), color-mix(in srgb, var(--surface) 40%, transparent));
+    }
+    .ai-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; margin-bottom: 8px; }
+    .ai-card p { color: var(--muted); font-size: 0.95rem; }
 
     /* ---------- Stack ---------- */
     .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
     .stack-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 14px; padding: 20px;
+      transition: border-color 0.15s, transform 0.15s;
     }
+    .stack-card:hover { border-color: var(--violet); transform: translateY(-2px); }
     .stack-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 12px; color: var(--cyan); }
     .chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .chip {
       font-size: 0.8rem; font-weight: 500; padding: 4px 12px;
       border-radius: 999px; border: 1px solid var(--border);
       background: color-mix(in srgb, var(--surface) 60%, transparent);
+      transition: border-color 0.15s;
     }
+    .chip:hover { border-color: var(--cyan); }
 
     /* ---------- Projects ---------- */
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
@@ -131,13 +185,23 @@
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 16px; padding: 24px;
       display: flex; flex-direction: column; gap: 12px;
-      transition: transform 0.15s ease, border-color 0.15s ease;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
     }
-    .project:hover { transform: translateY(-4px); border-color: var(--violet); }
-    .project .emoji { font-size: 1.6rem; }
+    .project:hover {
+      transform: translateY(-5px);
+      border-color: var(--violet);
+      box-shadow: var(--shadow);
+    }
+    .project .icon {
+      width: 46px; height: 46px; border-radius: 12px;
+      display: grid; place-items: center; font-size: 1.4rem;
+      background: var(--grad); box-shadow: 0 6px 18px -6px rgba(139, 92, 246, 0.5);
+    }
     .project h3 { font-size: 1.15rem; font-weight: 600; }
     .project p { color: var(--muted); font-size: 0.92rem; flex: 1; }
     .project .links { display: flex; gap: 16px; font-size: 0.9rem; font-weight: 600; }
+    .project .links a { transition: opacity 0.15s; }
+    .project .links a:hover { opacity: 0.8; }
 
     /* ---------- Building ---------- */
     .building {
@@ -147,20 +211,36 @@
       display: flex; gap: 16px; align-items: flex-start;
     }
     .building .pulse { width: 10px; height: 10px; border-radius: 50%; background: var(--magenta); margin-top: 8px; box-shadow: 0 0 12px var(--magenta); animation: pulse 1.6s infinite; flex-shrink: 0; }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
     /* ---------- Contact / Footer ---------- */
     .contact { text-align: center; }
     .contact .links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 24px; font-weight: 600; }
-    footer { border-top: 1px solid var(--border); padding: 28px 0; text-align: center; color: var(--muted); font-size: 0.88rem; }
+    footer { border-top: 1px solid var(--border); padding: 30px 0; text-align: center; color: var(--muted); font-size: 0.88rem; }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--text); }
+
+    /* ---------- Reveal on scroll ---------- */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 640px) {
       nav ul { display: none; }
-      .hero { padding: 64px 0 48px; }
+      .hero { padding: 68px 0 52px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .orb, .avatar-ring, .hero h1, .logo, .pulse { animation: none !important; }
+      .reveal { opacity: 1; transform: none; transition: none; }
     }
   </style>
 </head>
 <body>
+  <div class="bg" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
   <nav>
     <div class="container">
       <span class="logo">Progamins</span>
@@ -175,10 +255,12 @@
 
   <!-- HERO -->
   <header class="hero container">
-    <div class="avatar-ring"><img class="avatar" src="https://avatars.githubusercontent.com/u/143522546?v=4" alt="Progamins" width="108" height="108"></div>
+    <div class="avatar-ring"><img class="avatar" src="https://avatars.githubusercontent.com/u/143522546?v=4" alt="Progamins" width="116" height="116"></div>
+    <div class="badge-ai"><span class="dot"></span> Vibe Coder 🤖</div>
     <h1>Progamins</h1>
     <p class="role"><b>Full-Stack Developer</b> · Perú 🇵🇪</p>
     <p class="tagline">Build. Experiment. Ship. 🚀</p>
+    <p class="ai-note">Desarrollador que construye con IA: convierto ideas en productos reales con el apoyo de herramientas de desarrollo asistido.</p>
     <div class="cta">
       <a class="btn btn-primary" href="https://github.com/progamins" target="_blank" rel="noopener">GitHub</a>
       <a class="btn btn-ghost" href="https://github.com/progamins?tab=repositories" target="_blank" rel="noopener">Repositorios</a>
@@ -188,19 +270,32 @@
 
   <!-- SOBRE MÍ -->
   <section id="sobre-mi">
-    <div class="container">
+    <div class="container reveal">
       <h2 class="section-title">👋 Sobre mí</h2>
-      <p class="section-sub">Desarrollador full-stack de Perú. Desde 2023 construyo productos web completos — frontend, API, base de datos y despliegue — y experimento con nuevas tecnologías para convertir ideas en proyectos reales.</p>
+      <p class="section-sub">Desarrollador full-stack de Perú. Desde 2023 construyo productos web completos — frontend, API, base de datos y despliegue — y experimento con nuevas tecnologías.</p>
       <div class="about-card">
+        <p>Construyo con el apoyo de herramientas de IA: de la idea al prototipo y al producto en producción, con refactor y automatización de punta a punta.</p>
         <p>Actualmente trabajo en <b>Maison Rosas</b>, una tienda online en producción para una pastelería familiar: catálogo de kekes artesanales, pedidos con seguimiento, panel de administración multi-rol, modo offline PWA y notificaciones en tiempo real.</p>
         <p>Me gusta llevar un proyecto de punta a punta: diseño de la experiencia, arquitectura del backend, base de datos, despliegue y mantenimiento.</p>
       </div>
     </div>
   </section>
 
+  <!-- DESARROLLO CON IA -->
+  <section id="con-ia">
+    <div class="container reveal">
+      <h2 class="section-title">🤖 Desarrollo con IA</h2>
+      <p class="section-sub">Mi forma de trabajar: la IA como copiloto de todo el ciclo.</p>
+      <div class="ai-card">
+        <h3>De la idea al producto, más rápido</h3>
+        <p>Uso herramientas de IA para prototipar, escribir y refactorizar código, resolver problemas y automatizar tareas repetitivas — manteniendo el control de la arquitectura, la calidad y el resultado final. El resultado: productos completos y funcionales, en producción.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- TECH STACK -->
   <section id="stack">
-    <div class="container">
+    <div class="container reveal">
       <h2 class="section-title">🛠️ Tech Stack</h2>
       <p class="section-sub">Tecnologías que uso en mis proyectos reales.</p>
       <div class="stack-grid">
@@ -230,12 +325,12 @@
 
   <!-- PROYECTOS -->
   <section id="proyectos">
-    <div class="container">
+    <div class="container reveal">
       <h2 class="section-title">🚀 Proyectos destacados</h2>
       <p class="section-sub">Productos y experimentos que he construido.</p>
       <div class="projects-grid">
         <article class="project">
-          <span class="emoji">🍰</span>
+          <div class="icon">🍰</div>
           <h3>Maison Rosas</h3>
           <p>E-commerce full-stack para una pastelería peruana: catálogo, pedidos con seguimiento, panel admin multi-rol, PWA offline y notificaciones en tiempo real.</p>
           <div class="chips"><span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Express</span><span class="chip">MySQL</span><span class="chip">Docker</span></div>
@@ -245,21 +340,21 @@
           </div>
         </article>
         <article class="project">
-          <span class="emoji">🏫</span>
+          <div class="icon">🏫</div>
           <h3>iestp</h3>
           <p>Sistema web en PHP para gestión académica: asistencias, horarios, unidades y pagos.</p>
           <div class="chips"><span class="chip">PHP</span><span class="chip">JavaScript</span><span class="chip">MySQL</span></div>
           <div class="links"><a href="https://github.com/progamins/iestp" target="_blank" rel="noopener">Repositorio →</a></div>
         </article>
         <article class="project">
-          <span class="emoji">⚙️</span>
+          <div class="icon">⚙️</div>
           <h3>proceso-nodes</h3>
           <p>API Express de experimentación con múltiples bases de datos (SQL Server + MySQL), sesiones y seguridad.</p>
           <div class="chips"><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">SQL Server</span><span class="chip">MySQL</span></div>
           <div class="links"><a href="https://github.com/progamins/proceso-nodes" target="_blank" rel="noopener">Repositorio →</a></div>
         </article>
         <article class="project">
-          <span class="emoji">📱</span>
+          <div class="icon">📱</div>
           <h3>login</h3>
           <p>App Android de autenticación en Java con conexión a SQL Server (jTDS / MS SQL JDBC).</p>
           <div class="chips"><span class="chip">Java</span><span class="chip">Android</span><span class="chip">SQL Server</span></div>
@@ -271,7 +366,7 @@
 
   <!-- ACTUALMENTE CONSTRUYENDO -->
   <section id="construyendo">
-    <div class="container">
+    <div class="container reveal">
       <h2 class="section-title">🔭 Actualmente construyendo</h2>
       <div class="building">
         <span class="pulse"></span>
@@ -281,7 +376,7 @@
   </section>
 
   <!-- CONTACTO -->
-  <section id="contacto" class="contact container">
+  <section id="contacto" class="contact container reveal">
     <h2 class="section-title">📬 Conecta conmigo</h2>
     <p class="section-sub" style="margin-left:auto;margin-right:auto;">¿Tienes una idea o quieres colaborar? Abre un issue en cualquiera de mis repositorios.</p>
     <div class="links">
@@ -292,7 +387,21 @@
   </section>
 
   <footer>
-    <div class="container">© 2026 Progamins · Build. Experiment. Ship. · Hecho con 💜 desde Perú</div>
+    <div class="container">© <span id="year">2026</span> Progamins · Build. Experiment. Ship. · Hecho con 💜 desde Perú · <a href="https://github.com/progamins" target="_blank" rel="noopener">GitHub</a></div>
   </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+    } else {
+      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('visible'); });
+    }
+  </script>
 </body>
 </html>
