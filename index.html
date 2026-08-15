@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progamins — Full-Stack Developer</title>
+  <meta name="description" content="Portfolio de Progamins, desarrollador full-stack de Perú. Productos web, APIs, móvil y experimentos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0f1e;
+      --bg-soft: #0e1526;
+      --surface: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.09);
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --violet: #8b5cf6;
+      --cyan: #22d3ee;
+      --magenta: #ec4899;
+      --grad: linear-gradient(90deg, var(--violet), var(--cyan) 55%, var(--magenta));
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --bg-soft: #f1f5f9;
+        --surface: #ffffff;
+        --border: rgba(15, 23, 42, 0.12);
+        --text: #0f172a;
+        --muted: #475569;
+        --violet: #7c3aed;
+        --cyan: #0891b2;
+        --magenta: #db2777;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(600px 300px at 15% -5%, rgba(139, 92, 246, 0.16), transparent 60%),
+        radial-gradient(600px 300px at 85% 10%, rgba(34, 211, 238, 0.12), transparent 60%),
+        radial-gradient(500px 300px at 50% 110%, rgba(236, 72, 153, 0.10), transparent 60%);
+    }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+
+    /* ---------- Nav ---------- */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .container { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.1rem; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    nav ul { display: flex; gap: 24px; list-style: none; }
+    nav ul a { color: var(--muted); font-size: 0.9rem; font-weight: 500; }
+    nav ul a:hover { color: var(--text); text-decoration: none; }
+
+    /* ---------- Hero ---------- */
+    .hero { text-align: center; padding: 96px 0 72px; }
+    .avatar-ring {
+      width: 108px; height: 108px; border-radius: 50%;
+      background: var(--grad); padding: 3px;
+      margin: 0 auto 24px;
+    }
+    .avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.6rem, 7vw, 4.2rem);
+      font-weight: 700; letter-spacing: -0.02em;
+      background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero .role { margin-top: 12px; font-size: 1.15rem; color: var(--muted); }
+    .hero .role b { color: var(--text); }
+    .hero .tagline { margin-top: 8px; font-style: italic; color: var(--muted); }
+    .cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+    .btn {
+      display: inline-block; padding: 12px 22px; border-radius: 999px;
+      font-weight: 600; font-size: 0.95rem; transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-2px); text-decoration: none; }
+    .btn-primary { background: var(--grad); color: #fff; box-shadow: 0 8px 24px rgba(139, 92, 246, 0.35); }
+    .btn-ghost { border: 1px solid var(--border); color: var(--text); background: var(--surface); }
+
+    /* ---------- Sections ---------- */
+    section { padding: 64px 0; }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem; font-weight: 700; margin-bottom: 8px;
+    }
+    .section-sub { color: var(--muted); margin-bottom: 36px; max-width: 640px; }
+
+    .about-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px;
+    }
+    .about-card p + p { margin-top: 12px; }
+
+    /* ---------- Stack ---------- */
+    .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .stack-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px;
+    }
+    .stack-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 12px; color: var(--cyan); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 0.8rem; font-weight: 500; padding: 4px 12px;
+      border-radius: 999px; border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--surface) 60%, transparent);
+    }
+
+    /* ---------- Projects ---------- */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .project {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+    .project:hover { transform: translateY(-4px); border-color: var(--violet); }
+    .project .emoji { font-size: 1.6rem; }
+    .project h3 { font-size: 1.15rem; font-weight: 600; }
+    .project p { color: var(--muted); font-size: 0.92rem; flex: 1; }
+    .project .links { display: flex; gap: 16px; font-size: 0.9rem; font-weight: 600; }
+
+    /* ---------- Building ---------- */
+    .building {
+      background: var(--surface); border: 1px solid var(--border);
+      border-left: 3px solid var(--magenta);
+      border-radius: 12px; padding: 20px 24px;
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .building .pulse { width: 10px; height: 10px; border-radius: 50%; background: var(--magenta); margin-top: 8px; box-shadow: 0 0 12px var(--magenta); animation: pulse 1.6s infinite; flex-shrink: 0; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+    /* ---------- Contact / Footer ---------- */
+    .contact { text-align: center; }
+    .contact .links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 24px; font-weight: 600; }
+    footer { border-top: 1px solid var(--border); padding: 28px 0; text-align: center; color: var(--muted); font-size: 0.88rem; }
+
+    @media (max-width: 640px) {
+      nav ul { display: none; }
+      .hero { padding: 64px 0 48px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <span class="logo">Progamins</span>
+      <ul>
+        <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero container">
+    <div class="avatar-ring"><img class="avatar" src="https://avatars.githubusercontent.com/u/143522546?v=4" alt="Progamins" width="108" height="108"></div>
+    <h1>Progamins</h1>
+    <p class="role"><b>Full-Stack Developer</b> · Perú 🇵🇪</p>
+    <p class="tagline">Build. Experiment. Ship. 🚀</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://github.com/progamins" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-ghost" href="https://github.com/progamins?tab=repositories" target="_blank" rel="noopener">Repositorios</a>
+      <a class="btn btn-ghost" href="https://webhermanos-client.vercel.app" target="_blank" rel="noopener">Demo en vivo</a>
+    </div>
+  </header>
+
+  <!-- SOBRE MÍ -->
+  <section id="sobre-mi">
+    <div class="container">
+      <h2 class="section-title">👋 Sobre mí</h2>
+      <p class="section-sub">Desarrollador full-stack de Perú. Desde 2023 construyo productos web completos — frontend, API, base de datos y despliegue — y experimento con nuevas tecnologías para convertir ideas en proyectos reales.</p>
+      <div class="about-card">
+        <p>Actualmente trabajo en <b>Maison Rosas</b>, una tienda online en producción para una pastelería familiar: catálogo de kekes artesanales, pedidos con seguimiento, panel de administración multi-rol, modo offline PWA y notificaciones en tiempo real.</p>
+        <p>Me gusta llevar un proyecto de punta a punta: diseño de la experiencia, arquitectura del backend, base de datos, despliegue y mantenimiento.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section id="stack">
+    <div class="container">
+      <h2 class="section-title">🛠️ Tech Stack</h2>
+      <p class="section-sub">Tecnologías que uso en mis proyectos reales.</p>
+      <div class="stack-grid">
+        <div class="stack-card">
+          <h3>Frontend</h3>
+          <div class="chips"><span class="chip">TypeScript</span><span class="chip">React</span><span class="chip">Next.js</span><span class="chip">Vite</span><span class="chip">Tailwind CSS</span></div>
+        </div>
+        <div class="stack-card">
+          <h3>Backend</h3>
+          <div class="chips"><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">Python</span><span class="chip">PHP</span></div>
+        </div>
+        <div class="stack-card">
+          <h3>Database</h3>
+          <div class="chips"><span class="chip">MySQL</span><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span><span class="chip">SQL Server</span></div>
+        </div>
+        <div class="stack-card">
+          <h3>Mobile</h3>
+          <div class="chips"><span class="chip">Java</span><span class="chip">Android Studio</span></div>
+        </div>
+        <div class="stack-card">
+          <h3>DevOps</h3>
+          <div class="chips"><span class="chip">Git</span><span class="chip">Docker</span><span class="chip">Vercel</span><span class="chip">GitHub Actions</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section id="proyectos">
+    <div class="container">
+      <h2 class="section-title">🚀 Proyectos destacados</h2>
+      <p class="section-sub">Productos y experimentos que he construido.</p>
+      <div class="projects-grid">
+        <article class="project">
+          <span class="emoji">🍰</span>
+          <h3>Maison Rosas</h3>
+          <p>E-commerce full-stack para una pastelería peruana: catálogo, pedidos con seguimiento, panel admin multi-rol, PWA offline y notificaciones en tiempo real.</p>
+          <div class="chips"><span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Express</span><span class="chip">MySQL</span><span class="chip">Docker</span></div>
+          <div class="links">
+            <a href="https://github.com/progamins/webhermanos" target="_blank" rel="noopener">Repositorio →</a>
+            <a href="https://webhermanos-client.vercel.app" target="_blank" rel="noopener">Demo en vivo →</a>
+          </div>
+        </article>
+        <article class="project">
+          <span class="emoji">🏫</span>
+          <h3>iestp</h3>
+          <p>Sistema web en PHP para gestión académica: asistencias, horarios, unidades y pagos.</p>
+          <div class="chips"><span class="chip">PHP</span><span class="chip">JavaScript</span><span class="chip">MySQL</span></div>
+          <div class="links"><a href="https://github.com/progamins/iestp" target="_blank" rel="noopener">Repositorio →</a></div>
+        </article>
+        <article class="project">
+          <span class="emoji">⚙️</span>
+          <h3>proceso-nodes</h3>
+          <p>API Express de experimentación con múltiples bases de datos (SQL Server + MySQL), sesiones y seguridad.</p>
+          <div class="chips"><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">SQL Server</span><span class="chip">MySQL</span></div>
+          <div class="links"><a href="https://github.com/progamins/proceso-nodes" target="_blank" rel="noopener">Repositorio →</a></div>
+        </article>
+        <article class="project">
+          <span class="emoji">📱</span>
+          <h3>login</h3>
+          <p>App Android de autenticación en Java con conexión a SQL Server (jTDS / MS SQL JDBC).</p>
+          <div class="chips"><span class="chip">Java</span><span class="chip">Android</span><span class="chip">SQL Server</span></div>
+          <div class="links"><a href="https://github.com/progamins/login" target="_blank" rel="noopener">Repositorio →</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTUALMENTE CONSTRUYENDO -->
+  <section id="construyendo">
+    <div class="container">
+      <h2 class="section-title">🔭 Actualmente construyendo</h2>
+      <div class="building">
+        <span class="pulse"></span>
+        <p><b>Maison Rosas</b> — tienda online full-stack para una pastelería peruana. En producción en Vercel y con desarrollo activo: los últimos commits son de agosto 2026.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="contact container">
+    <h2 class="section-title">📬 Conecta conmigo</h2>
+    <p class="section-sub" style="margin-left:auto;margin-right:auto;">¿Tienes una idea o quieres colaborar? Abre un issue en cualquiera de mis repositorios.</p>
+    <div class="links">
+      <a href="https://github.com/progamins" target="_blank" rel="noopener">GitHub →</a>
+      <a href="https://webhermanos-client.vercel.app" target="_blank" rel="noopener">Maison Rosas · Demo →</a>
+      <a href="https://github.com/progamins/webhermanos" target="_blank" rel="noopener">Código fuente →</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">© 2026 Progamins · Build. Experiment. Ship. · Hecho con 💜 desde Perú</div>
+  </footer>
+</body>
+</html>
