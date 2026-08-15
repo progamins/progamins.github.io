@@ -168,7 +168,7 @@
 
   var FALLBACK = [
     { name: "webhermanos", desc: "Full-stack e-commerce for a Peruvian bakery (Maison Rosas) — in production.", lang: "TypeScript", updated: "2026-08-14T23:17:42Z", url: "https://github.com/progamins/webhermanos" },
-    { name: "proceso-nodes", desc: "Experimental Express API connecting SQL Server and MySQL, with sessions and security.", lang: "JavaScript", updated: "2024-12-26T04:25:00Z", url: "https://github.com/progamins/proceso-nodes" },
+    { name: "proceso-nodes", desc: "REST API in Node.js + Express + MySQL for the IESTP app: students, grades, schedules, justifications, QR codes — with JWT auth and tests.", lang: "JavaScript", updated: "2026-08-15T19:13:00Z", url: "https://github.com/progamins/proceso-nodes" },
     { name: "iestp", desc: "Academic management system in PHP + MySQL: QR attendance, schedules, units, justifications, payments and PDF reports.", lang: "PHP", updated: "2026-08-15T04:09:34-05:00", url: "https://github.com/progamins/iestp" },
     { name: "login", desc: "Android authentication app in Java with SQL Server connectivity.", lang: "Java", updated: "2024-07-25T17:51:31Z", url: "https://github.com/progamins/login" }
   ];
