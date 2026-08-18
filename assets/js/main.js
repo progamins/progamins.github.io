@@ -245,8 +245,8 @@
 
   var FALLBACK = ES ? [
     { name: "webhermanos", desc: "E-commerce full-stack para una pastelería peruana (Maison Rosas) — en producción.", lang: "TypeScript", updated: "2026-08-14T23:17:42Z", url: "https://github.com/progamins/webhermanos" },
-    { name: "proceso-nodes", desc: "API Express experimental que conecta SQL Server y MySQL, con sesiones y seguridad.", lang: "JavaScript", updated: "2024-12-26T04:25:00Z", url: "https://github.com/progamins/proceso-nodes" },
-    { name: "iestp", desc: "Sistema web de gestión académica en PHP: asistencias, horarios, unidades y pagos.", lang: "PHP", updated: "2024-12-17T19:02:06Z", url: "https://github.com/progamins/iestp" },
+    { name: "proceso-nodes", desc: "API REST en Node.js + Express + MySQL para la app del IESTP: estudiantes, notas, horarios, justificaciones, códigos QR — con autenticación JWT y tests.", lang: "JavaScript", updated: "2026-08-15T19:13:00Z", url: "https://github.com/progamins/proceso-nodes" },
+    { name: "iestp", desc: "Sistema de gestión académica en PHP + MySQL: asistencias con QR, horarios, unidades, justificaciones, pagos y reportes PDF.", lang: "PHP", updated: "2026-08-15T04:09:34-05:00", url: "https://github.com/progamins/iestp" },
     { name: "login", desc: "App Android de autenticación en Java con conexión a SQL Server.", lang: "Java", updated: "2024-07-25T17:51:31Z", url: "https://github.com/progamins/login" }
   ] : [
     { name: "webhermanos", desc: "Full-stack e-commerce for a Peruvian bakery (Maison Rosas) — in production.", lang: "TypeScript", updated: "2026-08-14T23:17:42Z", url: "https://github.com/progamins/webhermanos" },
