@@ -496,16 +496,36 @@ body.menu-open { overflow: hidden; }
 }
 .stack-cell li:hover { color: var(--text); transform: translateX(4px); }
 .stack-icons {
-  display: flex; align-items: center; gap: 26px; flex-wrap: wrap;
-  border: 1px solid var(--line); padding: 26px 24px; border-radius: 4px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 10px;
+  border: 1px solid var(--line); padding: 14px; border-radius: 4px;
 }
-.stack-icons img {
-  width: 44px; height: 44px;
+.tech-chip {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  padding: 22px 10px 16px;
+  border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg);
+  transition: border-color 0.3s var(--ease), background 0.3s, transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  will-change: transform;
+}
+.tech-chip img {
+  width: 42px; height: 42px;
   filter: grayscale(1) opacity(0.55);
-  transition: filter 0.35s var(--ease), transform 0.35s var(--ease);
+  transition: filter 0.3s var(--ease), transform 0.3s var(--ease);
 }
-.stack-icons:hover img { filter: grayscale(0) opacity(1); }
-.stack-icons img:hover { transform: translateY(-4px) scale(1.08); }
+.tech-chip span {
+  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--dim);
+  transition: color 0.3s;
+}
+.tech-chip:hover {
+  border-color: rgba(139, 92, 246, 0.5);
+  background: var(--bg-2);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px -16px rgba(139, 92, 246, 0.4);
+}
+.tech-chip:hover img { filter: grayscale(0) opacity(1); transform: scale(1.12); }
+.tech-chip:hover span { color: var(--text); }
 .stack-note {
   margin-top: 22px; font-family: var(--font-mono); font-size: 0.68rem;
   letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim);
@@ -657,6 +677,8 @@ body.menu-open { overflow: hidden; }
   .stat { padding: 20px 18px; }
   .learning-item { font-size: 1.05rem; }
   .stack-grid { grid-template-columns: 1fr; }
+  .stack-icons { grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 8px; padding: 10px; }
+  .tech-chip { padding: 16px 8px 12px; }
   .hero { padding: 120px 0 70px; }
   .footer { padding: 90px 0 32px; }
   .footer-actions { margin-bottom: 60px; }
