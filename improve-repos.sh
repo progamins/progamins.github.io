@@ -33,7 +33,7 @@ declare -A DESCS=(
   ["iestp"]="Sistema de gestión académica en PHP y MySQL: asistencias con QR, horarios, unidades didácticas, justificaciones, pagos y reportes PDF."
   ["proceso-nodes"]="API REST en Node.js y Express con MySQL: estudiantes, notas, horarios, justificaciones con imágenes y códigos QR — JWT, bcrypt, rate limiting y tests."
   ["android-login-sqlserver"]="App Android de autenticación en Java con conexión a SQL Server (jTDS / MS SQL JDBC)."
-  ["aplicativo-java"]="App Android (Kotlin + Jetpack Compose) de autenticación con API REST (Node.js + Express + SQLite) — login y registro con JWT y bcrypt."
+  ["aplicativo-java"]="App Android (Kotlin + Compose) de autenticación con API REST (Node.js + Express) — JWT con refresh tokens, Docker y SQLite/MySQL."
   ["tortas-web"]="Web de tortas y pasteles para un emprendimiento familiar — catálogo de productos y pedidos."
   ["progamins"]="Perfil de GitHub de Progamins — Full-Stack Developer. Build. Experiment. Ship."
 )
@@ -45,7 +45,7 @@ declare -A TOPICS=(
   ["iestp"]="php,mysql,bootstrap,pdo,fpdf,gestion-academica,asistencia,qr,horarios,instituto,sistema-web"
   ["proceso-nodes"]="nodejs,express,mysql,rest-api,jwt,bcrypt,rate-limiting,qrcode,tests,backend"
   ["android-login-sqlserver"]="android,java,sql-server,jtds,jdbc,authentication,mobile"
-  ["aplicativo-java"]="android,kotlin,jetpack-compose,retrofit,nodejs,express,sqlite,jwt,rest-api,authentication"
+  ["aplicativo-java"]="android,kotlin,jetpack-compose,retrofit,nodejs,express,docker,mysql,sqlite,jwt,rest-api,authentication"
   ["tortas-web"]="web,pasteleria,emprendimiento,ecommerce,catalogo"
   ["progamins"]="profile,readme,github-profile,full-stack-developer"
 )
