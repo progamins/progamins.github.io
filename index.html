@@ -216,7 +216,7 @@
 
   /* Work — case studies */
   .work-grid{display:flex;flex-direction:column}
-  .case{display:grid;grid-template-columns:1.05fr .95fr;gap:32px 40px;align-items:center;padding:36px 0;border-top:1px solid var(--line)}
+  .case{display:grid;grid-template-columns:1fr 1fr;gap:32px 36px;align-items:center;padding:32px 0;border-top:1px solid var(--line)}
   .case:last-child{border-bottom:1px solid var(--line)}
   .case.flip .c-info{order:2}
   .case.flip .c-media{order:1}
@@ -235,11 +235,18 @@
   .c-links a.secondary{color:var(--muted)}
   .c-media{position:relative;transition:transform .35s var(--ease)}
   .c-media:hover{transform:translateY(-2px)}
-  .frame{display:block;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:var(--bg-soft);transition:border-color .3s,box-shadow .3s}
-  .c-media:hover .frame{border-color:var(--line-strong);box-shadow:0 16px 40px -18px rgba(0,0,0,.4)}
+  .frame{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:var(--bg-soft);transition:border-color .3s,box-shadow .3s,transform .3s var(--ease)}
+  .c-media:hover .frame{border-color:var(--line-strong);box-shadow:0 16px 40px -18px rgba(0,0,0,.4);transform:scale(1.01)}
   [data-theme="light"] .c-media:hover .frame{box-shadow:0 16px 40px -18px rgba(0,0,0,.14)}
-  .frame img{width:100%;height:auto;aspect-ratio:auto;object-fit:contain;object-position:center;background:var(--bg-soft);display:block;filter:saturate(.96)}
-  .cap{position:absolute;left:10px;bottom:10px;font-family:var(--font-mono);font-size:.60rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.58);backdrop-filter:blur(6px);padding:5px 8px;border-radius:6px;border:1px solid rgba(255,255,255,.14)}
+  .frame-bar{height:34px;display:flex;align-items:center;gap:10px;padding:0 12px;background:var(--bg-2, #0e0e12);border-bottom:1px solid var(--line);flex-shrink:0}
+  .frame-bar .dots{display:flex;gap:6px}
+  .frame-bar .dots i{width:10px;height:10px;border-radius:50%;display:block}
+  .frame-bar .dots i:nth-child(1){background:#ff5f56}
+  .frame-bar .dots i:nth-child(2){background:#ffbd2e}
+  .frame-bar .dots i:nth-child(3){background:#27c93f}
+  .frame-bar .url{font-family:var(--font-mono);font-size:.64rem;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px}
+  .frame img{width:100%;aspect-ratio:16/9;object-fit:contain;object-position:center;background:var(--bg);padding:10px;display:block;filter:saturate(.97);transition:transform .35s var(--ease)}
+  .cap{position:absolute;left:10px;bottom:10px;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.56);backdrop-filter:blur(6px);padding:4px 8px;border-radius:6px;border:1px solid rgba(255,255,255,.14);max-width:calc(100% - 20px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .tile{display:grid;place-items:center;aspect-ratio:16/10;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;position:relative}
   .tile .big{font-family:var(--font-display);font-weight:800;font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-.03em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.22)}
   [data-theme="light"] .tile .big{-webkit-text-stroke-color:rgba(0,0,0,.18)}
@@ -438,7 +445,7 @@
               <h3 class="c-title">OpenMedia Downloader</h3>
               <p class="c-cat">Hybrid product — Vercel ↔ Tunnel ↔ Express :3001</p>
               <p class="c-desc">Hybrid media downloader. <b>Vercel (React + Vite)</b> bridges via <b>Cloudflare Tunnel</b> to <b>Express :3001 on your PC</b>. Queue up to 2 simultaneous downloads with <b>yt-dlp + FFmpeg</b>, real progress via <b>SSE</b>, <b>File System Access API</b> (save to D:\Music) with fallback download. One-click <code>INICIAR.bat → Producción</code> auto-detects tunnel URL, validates /health and pushes config to Vercel.</p>
-              <div class="c-stack"><span>React</span><span>TypeScript</span><span>Vite</span><span>Tailwind</span><span>Node.js</span><span>Express</span><span>SQLite</span><span>yt-dlp</span><span>FFmpeg</span><span>Cloudflare Tunnel</span><span>SSE</span></div>
+              <div class="c-stack"><span>React</span><span>TypeScript</span><span>Node.js</span><span>Express</span><span>yt-dlp</span><span>FFmpeg</span><span>Cloudflare Tunnel</span></div>
               <div class="c-links">
                 <a href="https://opendowload.vercel.app" target="_blank" rel="noopener">Live ↗</a>
                 <a class="secondary" href="https://github.com/progamins/opendowload" target="_blank" rel="noopener">GitHub ↗</a>
@@ -446,6 +453,7 @@
             </div>
             <div class="c-media">
               <a class="frame" href="https://opendowload.vercel.app" target="_blank" rel="noopener" aria-label="Open OpenMedia Downloader live">
+                <div class="frame-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">opendowload.vercel.app</span></div>
                 <img src="https://raw.githubusercontent.com/progamins/opendowload/main/docs/screenshots/home.png?v=2" alt="OpenMedia Downloader — screenshot from opendowload.vercel.app" loading="lazy" decoding="async" width="1280" height="800">
               </a>
               <span class="cap">opendowload.vercel.app — real screenshot</span>
@@ -467,6 +475,7 @@
             </div>
             <div class="c-media">
               <a class="frame" href="https://webhermanos-client.vercel.app" target="_blank" rel="noopener" aria-label="Open Maison Rosas live">
+                <div class="frame-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">webhermanos-client.vercel.app</span></div>
                 <img src="https://raw.githubusercontent.com/progamins/webhermanos/main/screenshots/home.png" alt="Maison Rosas — Peruvian artisan cake e-commerce screenshot" loading="lazy" decoding="async" width="1280" height="800">
               </a>
               <span class="cap">Maison Rosas — live site</span>
@@ -487,6 +496,7 @@
             </div>
             <div class="c-media">
               <a class="frame" href="https://github.com/progamins/iestp" target="_blank" rel="noopener" aria-label="Open iestp repository">
+                <div class="frame-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">github.com/progamins/iestp</span></div>
                 <img src="https://raw.githubusercontent.com/progamins/iestp/master/screenshots/dashboard.png" alt="iestp — academic management dashboard screenshot" loading="lazy" decoding="async" width="1280" height="800">
               </a>
               <span class="cap">iestp — academic dashboard</span>
