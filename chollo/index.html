@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chollo &amp; Glam · Joyería y artesanía peruana · Proyecto</title>
+<meta name="description" content="Chollo & Glam — E-commerce de joyería peruana. Astro 7 SSR + Tailwind CSS v4 + SQLite. Tienda, panel admin con pagos, carrusel de banners y logo configurables.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0b0b0e">
+<link rel="canonical" href="https://progamins.github.io/chollo/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chollo & Glam · E-commerce de joyería peruana">
+<meta property="og:description" content="Tienda SSR completa: Astro 7 + Tailwind CSS v4 + SQLite, con panel admin de pagos, moderación, carrusel de banners y logo configurables.">
+<meta property="og:image" content="https://raw.githubusercontent.com/progamins/website/main/web/public/uploads/productos/banner1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0e; --panel:#131318; --panel2:#191920; --line:#242430;
+    --gold:#c8a25a; --gold-l:#e2c078; --gold-d:#8a6a2a; --bronce:#c05a34; --ande:#2f7a72;
+    --tx:#ece7dd; --mut:#a9a297;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--tx);font-family:'Jost',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;letter-spacing:.01em}
+  a{color:var(--gold);text-decoration:none}
+  a:hover{color:var(--gold-l)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .gold{color:var(--gold)}
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(11,11,14,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;color:var(--tx);font-family:'Cormorant Garamond',serif;font-size:20px}
+  .logo{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--gold-l),var(--gold-d))}
+  .nav-links{display:flex;gap:22px;font-size:14px}
+  .pill{border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+  .pill-live{color:#7ddc87;border-color:#2c5233;background:rgba(125,220,135,.08)}
+  /* hero banner */
+  .banner{height:360px;overflow:hidden;position:relative;display:flex;align-items:flex-end}
+  .banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+  .banner .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,14,.15) 0%,rgba(11,11,14,.55) 60%,var(--bg) 100%)}
+  .banner .cap{position:relative;z-index:2;padding:0 0 22px;font-size:12px;color:var(--mut)}
+  /* sections */
+  section{padding:64px 0;border-top:1px solid var(--line)}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+  h2{font-size:38px;margin:8px 0 18px}
+  .lead{color:var(--mut);max-width:720px;margin-bottom:26px}
+  /* grid cards */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+  .card .ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;background:rgba(200,162,90,.12);margin-bottom:14px}
+  .card h3{font-size:21px}
+  .card p{color:var(--mut);font-size:14px;margin-top:6px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 14px;font-size:13px}
+  /* media */
+  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+  .shot{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .shot img{width:100%;height:200px;object-fit:cover;display:block}
+  .shot .bar{display:flex;align-items:center;gap:8px;padding:10px 14px;border-top:1px solid var(--line);font-size:11px;color:var(--mut)}
+  .shot .bar .dot{width:8px;height:8px;border-radius:50%}
+  /* code + table */
+  pre{background:#0e0e13;border:1px solid var(--line);border-radius:12px;padding:16px;overflow-x:auto;font-size:13px;color:#d9d4c8}
+  pre .c{color:#5c5c66}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  th{color:var(--mut);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+  code{background:#1b1b22;border-radius:6px;padding:2px 7px;font-size:.92em}
+  .btn{display:inline-block;border-radius:999px;padding:12px 26px;font-size:14px;font-weight:600}
+  .btn-gold{background:linear-gradient(135deg,var(--gold-l),var(--gold-d));color:#141009}
+  .btn-ghost{border:1px solid var(--line);color:var(--tx)}
+  .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+  footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:var(--mut);font-size:13px}
+  @media(max-width:640px){ .banner{height:220px} h2{font-size:30px} .nav-links{display:none} }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="brand" href="https://progamins.github.io/"><span class="logo">C</span> Progamins</a>
+    <div class="nav-links">
+      <a href="https://progamins.github.io/">Portafolio</a>
+      <a href="#overview">Proyecto</a>
+      <a href="#features">Características</a>
+      <a href="#run">Cómo ejecutar</a>
+      <a href="https://github.com/progamins/website" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </div>
+</nav>
+
+<header class="banner">
+  <img src="https://raw.githubusercontent.com/progamins/website/main/web/public/uploads/productos/banner1.png" alt="Banner Chollo & Glam">
+  <div class="overlay"></div>
+  <div class="wrap cap">banner de portada — carrusel gestionable desde el admin</div>
+</header>
+
+<section id="overview">
+  <div class="wrap">
+    <span class="kicker">E-commerce · 2026</span>
+    <h2>Chollo <span class="gold">&amp;</span> Glam</h2>
+    <p class="lead">Joyería y artesanía peruana de diseño exclusivo. Proyecto completo de <b>tienda online</b> con panel de administración, pagos, moderación de contenidos y configuración visual (logo + carrusel de banners) sin tocar código.</p>
+    <div class="cta">
+      <a class="btn btn-gold" href="https://github.com/progamins/website" target="_blank" rel="noopener">Ver código en GitHub ↗</a>
+      <a class="btn btn-ghost" href="#features">Ver características</a>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <span class="kicker">Todo incluido</span>
+    <h2>Características</h2>
+    <div class="grid">
+      <div class="card"><div class="ic">🛍️</div><h3>Tienda SSR</h3><p>Carrusel de banners a pantalla completa, ofertas flash con cuenta regresiva, destacados, categorías, colecciones, búsqueda y ficha de producto con valoraciones moderadas y SEO (JSON-LD).</p></div>
+      <div class="card"><div class="ic">🛒</div><h3>Carrito y checkout</h3><p>Carrito con animación al añadir, checkout profesional con datos de envío y métodos de pago (Tarjeta / PayPal / Transferencia) y página de confirmación de pedido.</p></div>
+      <div class="card"><div class="ic">🔐</div><h3>Admin separado</h3><p>Panel con login propio y diseño independiente: dashboard con estadísticas e ingresos netos, CRUD de productos, categorías, colecciones y ofertas flash.</p></div>
+      <div class="card"><div class="ic">💳</div><h3>Pagos profesionales</h3><p>Registrar, aprobar, fallar y reembolsar transacciones. Estado de pago del pedido automático (pendiente / parcial / pagado / fallido / reembolsado) con trazabilidad.</p></div>
+      <div class="card"><div class="ic">🖌️</div><h3>Banners y logo</h3><p>Desde el admin se cambia el logo de la tienda y se gestiona el carrusel de banners (vídeo/imagen/enlace) con guía de tamaños y márgenes.</p></div>
+      <div class="card"><div class="ic">👥</div><h3>Usuarios y moderación</h3><p>Roles admin / moderador / cliente, moderación de valoraciones y comentarios, notificaciones y bandeja de mensajes de contacto.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="kicker">Stack</span>
+    <h2>Tecnologías</h2>
+    <div class="chips">
+      <span class="chip">Astro 7 (SSR)</span><span class="chip">Tailwind CSS v4</span><span class="chip">SQLite · better-sqlite3</span><span class="chip">bcryptjs</span><span class="chip">Chart.js</span><span class="chip">JSON-LD · Schema.org</span><span class="chip">Open Graph</span><span class="chip">Node.js ≥ 22</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="kicker">Capturas</span>
+    <h2>Vista del proyecto</h2>
+    <div class="shots">
+      <div class="shot">
+        <img src="https://raw.githubusercontent.com/progamins/website/main/web/public/uploads/productos/banner1.png" alt="Portada con banner" loading="lazy">
+        <div class="bar"><span class="dot" style="background:var(--gold)"></span> Portada — carrusel de banners</div>
+      </div>
+      <div class="shot">
+        <img src="https://raw.githubusercontent.com/progamins/website/main/web/public/uploads/productos/coleccionE.png" alt="Colección" loading="lazy">
+        <div class="bar"><span class="dot" style="background:var(--ande)"></span> Colecciones y ofertas</div>
+      </div>
+      <div class="shot">
+        <img src="https://raw.githubusercontent.com/progamins/website/main/web/public/uploads/productos/haruki_logo.png" alt="Logo personalizable" loading="lazy">
+        <div class="bar"><span class="dot" style="background:var(--bronce)"></span> Logo configurable desde el admin</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="run">
+  <div class="wrap">
+    <span class="kicker">Local</span>
+    <h2>Cómo ejecutar</h2>
+    <p class="lead">El proyecto es una app <b>SSR con SQLite</b>, por lo que se ejecuta con un servidor Node (no es estático). Instala, genera la base de datos con datos de ejemplo y arranca:</p>
+    <pre><span class="c"># en la carpeta web/</span>
+npm install
+node scripts/seed.mjs   <span class="c"># crea data/chollo.db con datos demo</span>
+npm run dev             <span class="c"># → http://localhost:4321</span></pre>
+    <p class="lead" style="margin-top:18px">Producción: <code>npm run build</code> → <code>npm run preview</code>.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="kicker">Acceso</span>
+    <h2>Cuentas de prueba</h2>
+    <table>
+      <thead><tr><th>Rol</th><th>Email</th><th>Contraseña</th></tr></thead>
+      <tbody>
+        <tr><td>Admin</td><td><code>admin@cholloyglam.com</code></td><td><code>Admin123!</code></td></tr>
+        <tr><td>Moderador</td><td><code>moderador@cholloyglam.com</code></td><td><code>Moderador123!</code></td></tr>
+        <tr><td>Cliente</td><td><code>maria@email.com</code></td><td><code>Cliente123!</code></td></tr>
+      </tbody>
+    </table>
+    <p class="lead" style="margin-top:14px">Tienda en <code>/</code> · Panel de administración en <code>/admin</code> (login propio). Moneda en Soles (PEN).</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta">
+      <a class="btn btn-gold" href="https://github.com/progamins/website" target="_blank" rel="noopener">Ver código en GitHub ↗</a>
+      <a class="btn btn-ghost" href="https://progamins.github.io/">← Volver al portafolio</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Chollo &amp; Glam — proyecto de Progamins (Edwin Rosas Albines) · Hecho con ♥ en Perú</div>
+</footer>
+
+</body>
+</html>
