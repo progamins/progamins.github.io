@@ -17,137 +17,239 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0b0b0e; --panel:#131318; --panel2:#191920; --line:#242430;
+    --bg:#0b0b0e; --panel:#131318; --panel2:#191920; --line:#242430; --line-strong:#34343f;
     --gold:#c8a25a; --gold-l:#e2c078; --gold-d:#8a6a2a; --bronce:#c05a34; --ande:#2f7a72;
-    --tx:#ece7dd; --mut:#a9a297;
+    --tx:#ece7dd; --mut:#a9a297; --dim:#77726a;
+    --ease:cubic-bezier(0.16,1,0.30,1);
+    --r-sm:10px; --r-md:14px; --r-lg:20px; --r-pill:999px;
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--tx);font-family:'Jost',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
-  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;letter-spacing:.01em}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:84px}
+  body{background:var(--bg);color:var(--tx);font-family:'Jost',system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;letter-spacing:.01em;line-height:1.12}
   a{color:var(--gold);text-decoration:none}
   a:hover{color:var(--gold-l)}
+  img{display:block;max-width:100%}
+  ::selection{background:rgba(200,162,90,.30)}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
   .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
   .gold{color:var(--gold)}
-  /* nav */
-  nav{position:sticky;top:0;z-index:50;background:rgba(11,11,14,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .brand{display:flex;align-items:center;gap:10px;color:var(--tx);font-family:'Cormorant Garamond',serif;font-size:20px}
-  .logo{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--gold-l),var(--gold-d))}
-  .nav-links{display:flex;gap:22px;font-size:14px}
-  .pill{border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+
+  /* ── Skip link ── */
+  .skip{position:fixed;top:-60px;left:16px;z-index:200;background:var(--panel2);border:1px solid var(--line-strong);padding:10px 16px;font-size:13px;border-radius:var(--r-sm);transition:top .2s}
+  .skip:focus{top:16px;color:var(--tx)}
+
+  /* ── Nav ── */
+  nav{position:sticky;top:0;z-index:100;background:rgba(11,11,14,.82);backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);border-bottom:1px solid transparent;transition:border-color .3s,background .3s}
+  nav.scrolled{border-bottom-color:var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{display:flex;align-items:center;gap:11px;color:var(--tx);font-family:'Cormorant Garamond',serif;font-size:21px;letter-spacing:.02em}
+  .brand small{font-family:'Jost',sans-serif;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-left:2px}
+  .logo{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:19px;color:#fff;background:linear-gradient(135deg,var(--gold-l),var(--gold-d));box-shadow:0 0 0 4px rgba(200,162,90,.14)}
+  .nav-links{display:flex;align-items:center;gap:26px;font-size:14px}
+  .nav-links a{color:var(--mut);position:relative;padding:4px 0;transition:color .2s}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--ease)}
+  .nav-links a:hover,.nav-links a.active{color:var(--tx)}
+  .nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+  .pill{border:1px solid var(--line-strong);border-radius:var(--r-pill);padding:2px 11px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);white-space:nowrap}
   .pill-live{color:#7ddc87;border-color:#2c5233;background:rgba(125,220,135,.08)}
-  /* hero banner */
-  .banner{height:360px;overflow:hidden;position:relative;display:flex;align-items:flex-end}
-  .banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
-  .banner .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,14,.15) 0%,rgba(11,11,14,.55) 60%,var(--bg) 100%)}
-  .banner .cap{position:relative;z-index:2;padding:0 0 22px;font-size:12px;color:var(--mut)}
-  /* sections */
-  section{padding:64px 0;border-top:1px solid var(--line)}
-  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
-  h2{font-size:38px;margin:8px 0 18px}
-  .lead{color:var(--mut);max-width:720px;margin-bottom:26px}
-  /* grid cards */
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
-  .card .ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;background:rgba(200,162,90,.12);margin-bottom:14px}
-  .card h3{font-size:21px}
-  .card p{color:var(--mut);font-size:14px;margin-top:6px}
-  .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 14px;font-size:13px}
-  /* media */
-  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
-  .shot{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-  .shot img{width:100%;height:200px;object-fit:cover;display:block}
-  .shot .bar{display:flex;align-items:center;gap:8px;padding:10px 14px;border-top:1px solid var(--line);font-size:11px;color:var(--mut)}
-  .shot .bar .dot{width:8px;height:8px;border-radius:50%}
-  /* code + table */
-  pre{background:#0e0e13;border:1px solid var(--line);border-radius:12px;padding:16px;overflow-x:auto;font-size:13px;color:#d9d4c8}
+  .nav-cta{font-size:13px;font-weight:500;letter-spacing:.04em;background:linear-gradient(135deg,var(--gold-l),var(--gold-d));color:#141009;padding:9px 18px;border-radius:var(--r-pill);transition:transform .2s var(--ease),opacity .2s;white-space:nowrap}
+  .nav-cta:hover{color:#141009;opacity:.9;transform:translateY(-1px)}
+  @media(max-width:820px){ .nav-links{display:none} }
+
+  /* ── Hero ── */
+  .hero{position:relative;min-height:78vh;display:flex;align-items:flex-end;overflow:hidden}
+  .hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+  .hero::before{content:"";position:absolute;inset:0;z-index:1;background:
+    linear-gradient(90deg,rgba(11,11,14,.88) 0%,rgba(11,11,14,.55) 45%,rgba(11,11,14,.18) 75%),
+    linear-gradient(0deg,rgba(11,11,14,.92) 0%,rgba(11,11,14,.35) 40%,rgba(11,11,14,.05) 100%)}
+  .hero::after{content:"";position:absolute;z-index:1;top:-30%;right:-10%;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(200,162,90,.16),transparent 65%);pointer-events:none}
+  .hero-in{position:relative;z-index:2;width:100%;padding:120px 0 56px}
+  .hero-kick{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-l);margin-bottom:18px}
+  .hero-kick::before{content:"";width:34px;height:1px;background:var(--gold)}
+  h1{font-size:clamp(3rem,9vw,5.4rem);font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+  h1 .amp{color:var(--gold);font-style:italic}
+  .hero-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(1.15rem,2.4vw,1.45rem);color:var(--mut);max-width:56ch;margin-bottom:30px}
+  .cta{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;border-radius:var(--r-pill);padding:13px 26px;font-size:14px;font-weight:600;letter-spacing:.03em;transition:transform .2s var(--ease),opacity .2s,border-color .2s;white-space:nowrap}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-gold{background:linear-gradient(135deg,var(--gold-l),var(--gold-d));color:#141009;box-shadow:0 10px 30px -12px rgba(200,162,90,.55)}
+  .btn-gold:hover{color:#141009;opacity:.92}
+  .btn-ghost{border:1px solid var(--line-strong);color:var(--tx);background:rgba(11,11,14,.35);backdrop-filter:blur(6px)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-l)}
+  .hero-cap{position:absolute;right:26px;bottom:20px;z-index:2;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+  .scroll-hint{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:2;width:1px;height:44px;background:linear-gradient(180deg,var(--gold),transparent);opacity:.7;animation:drift 2.4s var(--ease) infinite}
+  @keyframes drift{0%,100%{transform:translate(-50%,0);opacity:.7}50%{transform:translate(-50%,8px);opacity:.25}}
+  @media(max-width:640px){ .hero{min-height:68vh} .hero-in{padding:96px 0 44px} .hero-cap{display:none} }
+
+  /* ── Sections ── */
+  section{padding:72px 0;border-top:1px solid var(--line)}
+  .kicker{display:flex;align-items:center;gap:12px;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  .kicker::after{content:"";width:44px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+  h2{font-size:clamp(1.9rem,4.4vw,2.6rem);margin-bottom:16px}
+  .lead{color:var(--mut);max-width:720px;margin-bottom:30px;font-size:16px}
+  .lead b{color:var(--tx);font-weight:600}
+  @media(max-width:640px){ section{padding:56px 0} }
+
+  /* ── Feature cards ── */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+  .card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;display:flex;flex-direction:column;gap:12px;transition:transform .3s var(--ease),border-color .3s,box-shadow .3s}
+  .card:hover{transform:translateY(-4px);border-color:var(--line-strong);box-shadow:0 18px 44px -22px rgba(0,0,0,.65)}
+  .card .ic{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;background:linear-gradient(135deg,rgba(200,162,90,.18),rgba(200,162,90,.06));border:1px solid rgba(200,162,90,.25)}
+  .card h3{font-size:22px}
+  .card p{color:var(--mut);font-size:14px;flex:1}
+
+  /* ── Tech chips ── */
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{border:1px solid var(--line-strong);background:var(--panel);border-radius:var(--r-pill);padding:8px 16px;font-size:13.5px;color:var(--mut);transition:border-color .2s,color .2s}
+  .chip:hover{border-color:var(--gold);color:var(--gold-l)}
+  .chip b{color:var(--tx);font-weight:500}
+
+  /* ── Screenshots: browser frames ── */
+  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+  .shot{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;transition:transform .3s var(--ease),border-color .3s,box-shadow .3s}
+  .shot:hover{transform:translateY(-3px);border-color:var(--line-strong);box-shadow:0 18px 44px -22px rgba(0,0,0,.6)}
+  .shot .top{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#0e0e13;border-bottom:1px solid var(--line)}
+  .shot .top .dots{display:flex;gap:6px}
+  .shot .top .dots i{width:9px;height:9px;border-radius:50%;display:block}
+  .shot .top .dots i:nth-child(1){background:#ff5f56}.shot .top .dots i:nth-child(2){background:#ffbd2e}.shot .top .dots i:nth-child(3){background:#27c93f}
+  .shot .top .url{font-size:10.5px;color:var(--dim);background:var(--bg);border:1px solid var(--line);border-radius:var(--r-pill);padding:3px 12px;margin-left:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px}
+  .shot img{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:center top;display:block;background:#0e0e13}
+  .shot .bar{display:flex;align-items:center;gap:10px;padding:11px 14px;border-top:1px solid var(--line);font-size:12px;color:var(--mut)}
+  .shot .bar .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+  /* ── Terminal / code ── */
+  .term{background:#0e0e13;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
+  .term .tbar{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);font-size:11px;color:var(--dim)}
+  .term .tbar .dots{display:flex;gap:6px}
+  .term .tbar .dots i{width:9px;height:9px;border-radius:50%;display:block}
+  .term .tbar .dots i:nth-child(1){background:#ff5f56}.term .tbar .dots i:nth-child(2){background:#ffbd2e}.term .tbar .dots i:nth-child(3){background:#27c93f}
+  .term .tbar span{margin-left:6px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  pre{background:transparent;padding:18px;overflow-x:auto;font-size:13px;line-height:1.7;color:#d9d4c8;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
   pre .c{color:#5c5c66}
+  pre .cmd{color:var(--gold-l)}
+
+  /* ── Table (demo accounts) ── */
+  .table-wrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;max-width:640px}
   table{width:100%;border-collapse:collapse;font-size:14px}
-  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
-  th{color:var(--mut);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
-  code{background:#1b1b22;border-radius:6px;padding:2px 7px;font-size:.92em}
-  .btn{display:inline-block;border-radius:999px;padding:12px 26px;font-size:14px;font-weight:600}
-  .btn-gold{background:linear-gradient(135deg,var(--gold-l),var(--gold-d));color:#141009}
-  .btn-ghost{border:1px solid var(--line);color:var(--tx)}
-  .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
-  footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:var(--mut);font-size:13px}
-  @media(max-width:640px){ .banner{height:220px} h2{font-size:30px} .nav-links{display:none} }
+  th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line)}
+  tr:last-child td{border-bottom:0}
+  th{color:var(--dim);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.14em;background:#0e0e13}
+  code{background:#1b1b22;border:1px solid var(--line);border-radius:6px;padding:2px 8px;font-size:.9em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .role{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;letter-spacing:.04em}
+  .role::before{content:"";width:7px;height:7px;border-radius:50%}
+  .role-admin::before{background:var(--gold)}
+  .role-mod::before{background:var(--ande)}
+  .role-cli::before{background:var(--bronce)}
+  .note{margin-top:14px;font-size:13.5px;color:var(--mut)}
+
+  /* ── Reveal ── */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    .scroll-hint{display:none}
+    .btn:hover,.card:hover,.shot:hover{transform:none}
+  }
+
+  /* ── CTA final + footer ── */
+  .final{text-align:center}
+  .final .cta{justify-content:center}
+  footer{border-top:1px solid var(--line);padding:38px 0;margin-top:8px}
+  .foot{display:flex;flex-wrap:wrap;gap:14px 26px;justify-content:space-between;align-items:center}
+  .foot .brand{font-size:18px}
+  .foot-links{display:flex;gap:20px;font-size:13px}
+  .foot-links a{color:var(--mut)}
+  .foot-links a:hover{color:var(--gold-l)}
+  .foot small{display:block;width:100%;text-align:center;color:var(--dim);font-size:12px;margin-top:14px}
 </style>
 </head>
 <body>
 
-<nav>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<nav id="nav">
   <div class="wrap nav-in">
-    <a class="brand" href="https://progamins.github.io/"><span class="logo">C</span> Progamins</a>
+    <a class="brand" href="https://progamins.github.io/"><span class="logo">C</span> Chollo <small>&amp; Glam</small></a>
     <div class="nav-links">
       <a href="https://progamins.github.io/">Portafolio</a>
-      <a href="#overview">Proyecto</a>
+      <a href="#overview" class="active">Proyecto</a>
       <a href="#features">Características</a>
       <a href="#run">Cómo ejecutar</a>
-      <a href="https://github.com/progamins/website" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="nav-cta" href="https://github.com/progamins/website" target="_blank" rel="noopener">GitHub ↗</a>
     </div>
   </div>
 </nav>
 
-<header class="banner">
-  <img src="https://raw.githubusercontent.com/progamins/website/main/web/public/uploads/productos/banner1.png" alt="Banner Chollo & Glam">
-  <div class="overlay"></div>
-  <div class="wrap cap">banner de portada — carrusel gestionable desde el admin</div>
-</header>
-
-<section id="overview">
-  <div class="wrap">
-    <span class="kicker">E-commerce · 2026</span>
-    <h2>Chollo <span class="gold">&amp;</span> Glam</h2>
-    <p class="lead">Joyería y artesanía peruana de diseño exclusivo. Proyecto completo de <b>tienda online</b> con panel de administración, pagos, moderación de contenidos y configuración visual (logo + carrusel de banners) sin tocar código.</p>
-    <div class="cta">
+<header class="hero" id="top">
+  <img class="bg" src="https://raw.githubusercontent.com/progamins/website/main/web/public/uploads/productos/banner1.png" alt="Banner de portada de Chollo & Glam">
+  <div class="wrap hero-in">
+    <span class="hero-kick reveal">E-commerce · 2026 · Astro SSR</span>
+    <h1 class="reveal">Chollo <span class="amp">&amp;</span> Glam</h1>
+    <p class="hero-sub reveal">Joyería y artesanía peruana de diseño exclusivo. Una tienda online completa con panel de administración, pagos, moderación de contenidos y configuración visual (logo + carrusel de banners) sin tocar código.</p>
+    <div class="cta reveal">
       <a class="btn btn-gold" href="https://github.com/progamins/website" target="_blank" rel="noopener">Ver código en GitHub ↗</a>
       <a class="btn btn-ghost" href="#features">Ver características</a>
     </div>
+  </div>
+  <span class="hero-cap">banner de portada — carrusel gestionable desde el admin</span>
+  <span class="scroll-hint" aria-hidden="true"></span>
+</header>
+
+<main id="main">
+
+<section id="overview">
+  <div class="wrap">
+    <span class="kicker reveal">Sobre el proyecto</span>
+    <h2 class="reveal">Una tienda hecha para venderse sola</h2>
+    <p class="lead reveal">Chollo &amp; Glam es un proyecto completo de <b>e-commerce SSR</b> para una marca de joyería y artesanía peruana: la tienda pública, el carrito, el checkout con métodos de pago, y un panel de administración separado para gestionar productos, pagos, valoraciones y la imagen de la marca — todo configurable desde el admin, sin tocar código.</p>
   </div>
 </section>
 
 <section id="features">
   <div class="wrap">
-    <span class="kicker">Todo incluido</span>
-    <h2>Características</h2>
+    <span class="kicker reveal">Todo incluido</span>
+    <h2 class="reveal">Características</h2>
     <div class="grid">
-      <div class="card"><div class="ic">🛍️</div><h3>Tienda SSR</h3><p>Carrusel de banners a pantalla completa, ofertas flash con cuenta regresiva, destacados, categorías, colecciones, búsqueda y ficha de producto con valoraciones moderadas y SEO (JSON-LD).</p></div>
-      <div class="card"><div class="ic">🛒</div><h3>Carrito y checkout</h3><p>Carrito con animación al añadir, checkout profesional con datos de envío y métodos de pago (Tarjeta / PayPal / Transferencia) y página de confirmación de pedido.</p></div>
-      <div class="card"><div class="ic">🔐</div><h3>Admin separado</h3><p>Panel con login propio y diseño independiente: dashboard con estadísticas e ingresos netos, CRUD de productos, categorías, colecciones y ofertas flash.</p></div>
-      <div class="card"><div class="ic">💳</div><h3>Pagos profesionales</h3><p>Registrar, aprobar, fallar y reembolsar transacciones. Estado de pago del pedido automático (pendiente / parcial / pagado / fallido / reembolsado) con trazabilidad.</p></div>
-      <div class="card"><div class="ic">🖌️</div><h3>Banners y logo</h3><p>Desde el admin se cambia el logo de la tienda y se gestiona el carrusel de banners (vídeo/imagen/enlace) con guía de tamaños y márgenes.</p></div>
-      <div class="card"><div class="ic">👥</div><h3>Usuarios y moderación</h3><p>Roles admin / moderador / cliente, moderación de valoraciones y comentarios, notificaciones y bandeja de mensajes de contacto.</p></div>
+      <div class="card reveal"><div class="ic">🛍️</div><h3>Tienda SSR</h3><p>Carrusel de banners a pantalla completa, ofertas flash con cuenta regresiva, destacados, categorías, colecciones, búsqueda y ficha de producto con valoraciones moderadas y SEO (JSON-LD).</p></div>
+      <div class="card reveal"><div class="ic">🛒</div><h3>Carrito y checkout</h3><p>Carrito con animación al añadir, checkout profesional con datos de envío y métodos de pago (Tarjeta / PayPal / Transferencia) y página de confirmación de pedido.</p></div>
+      <div class="card reveal"><div class="ic">🔐</div><h3>Admin separado</h3><p>Panel con login propio y diseño independiente: dashboard con estadísticas e ingresos netos, CRUD de productos, categorías, colecciones y ofertas flash.</p></div>
+      <div class="card reveal"><div class="ic">💳</div><h3>Pagos profesionales</h3><p>Registrar, aprobar, fallar y reembolsar transacciones. Estado de pago del pedido automático (pendiente / parcial / pagado / fallido / reembolsado) con trazabilidad.</p></div>
+      <div class="card reveal"><div class="ic">🖌️</div><h3>Banners y logo</h3><p>Desde el admin se cambia el logo de la tienda y se gestiona el carrusel de banners (vídeo/imagen/enlace) con guía de tamaños y márgenes.</p></div>
+      <div class="card reveal"><div class="ic">👥</div><h3>Usuarios y moderación</h3><p>Roles admin / moderador / cliente, moderación de valoraciones y comentarios, notificaciones y bandeja de mensajes de contacto.</p></div>
     </div>
   </div>
 </section>
 
-<section>
+<section id="stack">
   <div class="wrap">
-    <span class="kicker">Stack</span>
-    <h2>Tecnologías</h2>
+    <span class="kicker reveal">Stack</span>
+    <h2 class="reveal">Tecnologías</h2>
     <div class="chips">
-      <span class="chip">Astro 7 (SSR)</span><span class="chip">Tailwind CSS v4</span><span class="chip">SQLite · better-sqlite3</span><span class="chip">bcryptjs</span><span class="chip">Chart.js</span><span class="chip">JSON-LD · Schema.org</span><span class="chip">Open Graph</span><span class="chip">Node.js ≥ 22</span>
+      <span class="chip"><b>Astro 7</b> (SSR)</span><span class="chip"><b>Tailwind CSS v4</b></span><span class="chip">SQLite · better-sqlite3</span><span class="chip">bcryptjs</span><span class="chip">Chart.js</span><span class="chip">JSON-LD · Schema.org</span><span class="chip">Open Graph</span><span class="chip">Node.js ≥ 22</span>
     </div>
   </div>
 </section>
 
-<section>
+<section id="shots">
   <div class="wrap">
-    <span class="kicker">Capturas</span>
-    <h2>Vista del proyecto</h2>
+    <span class="kicker reveal">Capturas</span>
+    <h2 class="reveal">Vista del proyecto</h2>
     <div class="shots">
-      <div class="shot">
-        <img src="https://raw.githubusercontent.com/progamins/website/main/web/public/uploads/productos/banner1.png" alt="Portada con banner" loading="lazy">
+      <div class="shot reveal">
+        <div class="top"><span class="dots"><i></i><i></i><i></i></span><span class="url">cholloyglam · portada</span></div>
+        <img src="https://raw.githubusercontent.com/progamins/website/main/web/public/uploads/productos/banner1.png" alt="Portada de Chollo & Glam con carrusel de banners" loading="lazy">
         <div class="bar"><span class="dot" style="background:var(--gold)"></span> Portada — carrusel de banners</div>
       </div>
-      <div class="shot">
-        <img src="https://raw.githubusercontent.com/progamins/website/main/web/public/uploads/productos/coleccionE.png" alt="Colección" loading="lazy">
+      <div class="shot reveal">
+        <div class="top"><span class="dots"><i></i><i></i><i></i></span><span class="url">cholloyglam · colecciones</span></div>
+        <img src="https://raw.githubusercontent.com/progamins/website/main/web/public/uploads/productos/coleccionE.png" alt="Sección de colecciones y ofertas de Chollo & Glam" loading="lazy">
         <div class="bar"><span class="dot" style="background:var(--ande)"></span> Colecciones y ofertas</div>
       </div>
-      <div class="shot">
-        <img src="https://raw.githubusercontent.com/progamins/website/main/web/public/uploads/productos/haruki_logo.png" alt="Logo personalizable" loading="lazy">
+      <div class="shot reveal">
+        <div class="top"><span class="dots"><i></i><i></i><i></i></span><span class="url">cholloyglam · logo</span></div>
+        <img src="https://raw.githubusercontent.com/progamins/website/main/web/public/uploads/productos/haruki_logo.png" alt="Logo de Chollo & Glam configurable desde el admin" loading="lazy">
         <div class="bar"><span class="dot" style="background:var(--bronce)"></span> Logo configurable desde el admin</div>
       </div>
     </div>
@@ -156,45 +258,107 @@
 
 <section id="run">
   <div class="wrap">
-    <span class="kicker">Local</span>
-    <h2>Cómo ejecutar</h2>
-    <p class="lead">El proyecto es una app <b>SSR con SQLite</b>, por lo que se ejecuta con un servidor Node (no es estático). Instala, genera la base de datos con datos de ejemplo y arranca:</p>
-    <pre><span class="c"># en la carpeta web/</span>
-npm install
-node scripts/seed.mjs   <span class="c"># crea data/chollo.db con datos demo</span>
-npm run dev             <span class="c"># → http://localhost:4321</span></pre>
-    <p class="lead" style="margin-top:18px">Producción: <code>npm run build</code> → <code>npm run preview</code>.</p>
+    <span class="kicker reveal">Local</span>
+    <h2 class="reveal">Cómo ejecutar</h2>
+    <p class="lead reveal">El proyecto es una app <b>SSR con SQLite</b>, por lo que se ejecuta con un servidor Node (no es estático). Instala, genera la base de datos con datos de ejemplo y arranca:</p>
+    <div class="term reveal">
+      <div class="tbar"><span class="dots"><i></i><i></i><i></i></span><span>web — terminal</span></div>
+      <pre><span class="c"># en la carpeta web/</span>
+<span class="cmd">npm install</span>
+<span class="cmd">node scripts/seed.mjs</span>   <span class="c"># crea data/chollo.db con datos demo</span>
+<span class="cmd">npm run dev</span>             <span class="c"># → http://localhost:4321</span></pre>
+    </div>
+    <p class="note reveal" style="margin-top:16px">Producción: <code>npm run build</code> → <code>npm run preview</code>.</p>
   </div>
 </section>
 
-<section>
+<section id="accounts">
   <div class="wrap">
-    <span class="kicker">Acceso</span>
-    <h2>Cuentas de prueba</h2>
-    <table>
-      <thead><tr><th>Rol</th><th>Email</th><th>Contraseña</th></tr></thead>
-      <tbody>
-        <tr><td>Admin</td><td><code>admin@cholloyglam.com</code></td><td><code>Admin123!</code></td></tr>
-        <tr><td>Moderador</td><td><code>moderador@cholloyglam.com</code></td><td><code>Moderador123!</code></td></tr>
-        <tr><td>Cliente</td><td><code>maria@email.com</code></td><td><code>Cliente123!</code></td></tr>
-      </tbody>
-    </table>
-    <p class="lead" style="margin-top:14px">Tienda en <code>/</code> · Panel de administración en <code>/admin</code> (login propio). Moneda en Soles (PEN).</p>
+    <span class="kicker reveal">Acceso</span>
+    <h2 class="reveal">Cuentas de prueba</h2>
+    <div class="table-wrap reveal">
+      <table>
+        <thead><tr><th>Rol</th><th>Email</th><th>Contraseña</th></tr></thead>
+        <tbody>
+          <tr><td><span class="role role-admin">Admin</span></td><td><code>admin@cholloyglam.com</code></td><td><code>Admin123!</code></td></tr>
+          <tr><td><span class="role role-mod">Moderador</span></td><td><code>moderador@cholloyglam.com</code></td><td><code>Moderador123!</code></td></tr>
+          <tr><td><span class="role role-cli">Cliente</span></td><td><code>maria@email.com</code></td><td><code>Cliente123!</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note reveal">Tienda en <code>/</code> · Panel de administración en <code>/admin</code> (login propio). Moneda en Soles (PEN).</p>
   </div>
 </section>
 
-<section>
+<section class="final">
   <div class="wrap">
-    <div class="cta">
+    <h2 class="reveal">Un proyecto completo, de punta a punta</h2>
+    <p class="lead reveal" style="margin-inline:auto">Tienda, panel admin, pagos, moderación y configuración visual — todo en un solo repositorio.</p>
+    <div class="cta reveal">
       <a class="btn btn-gold" href="https://github.com/progamins/website" target="_blank" rel="noopener">Ver código en GitHub ↗</a>
       <a class="btn btn-ghost" href="https://progamins.github.io/">← Volver al portafolio</a>
     </div>
   </div>
 </section>
 
+</main>
+
 <footer>
-  <div class="wrap">Chollo &amp; Glam — proyecto de Progamins (Edwin Rosas Albines) · Hecho con ♥ en Perú</div>
+  <div class="wrap foot">
+    <a class="brand" href="https://progamins.github.io/"><span class="logo">C</span> Chollo <small>&amp; Glam</small></a>
+    <div class="foot-links">
+      <a href="https://progamins.github.io/">Portafolio</a>
+      <a href="https://github.com/progamins/website" target="_blank" rel="noopener">GitHub</a>
+      <a href="#top">Volver arriba ↑</a>
+    </div>
+    <small>Chollo &amp; Glam — proyecto de Progamins (Edwin Rosas Albines) · Hecho con ♥ en Perú</small>
+  </div>
 </footer>
 
+<script>
+(function () {
+  "use strict";
+
+  // Nav: estado al hacer scroll
+  var nav = document.getElementById("nav");
+  function onScroll() {
+    if (nav) nav.classList.toggle("scrolled", window.scrollY > 8);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // Reveal on scroll
+  var reveals = document.querySelectorAll(".reveal");
+  var REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if ("IntersectionObserver" in window && !REDUCED) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.classList.add("in");
+        io.unobserve(en.target);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add("in"); });
+  }
+
+  // Scroll spy para el nav
+  var links = document.querySelectorAll(".nav-links a[href^='#']");
+  var sections = document.querySelectorAll("section[id]");
+  if ("IntersectionObserver" in window && links.length) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var id = en.target.getAttribute("id");
+        links.forEach(function (a) {
+          a.classList.toggle("active", a.getAttribute("href") === "#" + id);
+        });
+      });
+    }, { rootMargin: "-38% 0px -55% 0px" });
+    sections.forEach(function (s) { spy.observe(s); });
+  }
+})();
+</script>
 </body>
 </html>
