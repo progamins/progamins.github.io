@@ -181,8 +181,19 @@
     -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 0%, black 38%, transparent 72%);
   }
   [data-theme="light"] .hero-grid-bg{opacity:.32}
-  .hero-inner{position:relative;max-width:var(--max);margin:0 auto;padding:0 24px}
+  .hero-inner{position:relative;max-width:var(--max);margin:0 auto;padding:0 24px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 48px;align-items:center}
   @media(max-width:640px){.hero-inner{padding:0 20px}}
+  .hero-copy{min-width:0}
+  .hero-photo{justify-self:end;align-self:center;margin:0}
+  .hero-photo img{display:block;width:clamp(230px,26vw,360px);height:auto;filter:drop-shadow(0 32px 56px rgba(0,0,0,.38));animation:photoFloat 7s var(--ease) infinite;-webkit-mask-image:linear-gradient(to bottom,black 78%,transparent 99%);mask-image:linear-gradient(to bottom,black 78%,transparent 99%)}
+  @keyframes photoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  @media(prefers-reduced-motion:reduce){.hero-photo img{animation:none}}
+  .hero-rule{grid-column:1/-1}
+  @media(max-width:900px){
+    .hero-inner{grid-template-columns:1fr;gap:8px}
+    .hero-photo{justify-self:center;margin-top:4px}
+    .hero-photo img{width:min(230px,58vw)}
+  }
   .eyebrow{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:12px;margin-bottom:20px}
   .eyebrow::before{content:"";width:24px;height:1px;background:var(--line-strong)}
   .hero h1{font-family:var(--font-display);font-weight:800;font-size:clamp(2.6rem,9vw,5.2rem);line-height:.92;letter-spacing:-.04em;margin-bottom:18px}
@@ -402,20 +413,25 @@
     <section class="hero" id="top" aria-label="Hero">
       <div class="hero-grid-bg" aria-hidden="true"></div>
       <div class="hero-inner">
-        <p class="eyebrow reveal">Full-Stack Developer · Peru</p>
-        <h1 class="reveal" style="transition-delay:60ms">
-          Build.<br>
-          Experiment.<br>
-          Ship.
-        </h1>
-        <p class="hero-sub reveal" style="transition-delay:120ms">
-          I build <strong>real-world web applications, business systems and digital products</strong> — from architecture to production. I build, deploy and ship real products.
-        </p>
-        <div class="hero-ctas reveal" style="transition-delay:180ms">
-          <a class="btn btn-primary" href="#contact">Start a project <span class="arr">→</span></a>
-          <a class="btn btn-ghost" href="#work">Explore my work <span class="arr">↗</span></a>
+        <div class="hero-copy">
+          <p class="eyebrow reveal">Full-Stack Developer · Peru</p>
+          <h1 class="reveal" style="transition-delay:60ms">
+            Build.<br>
+            Experiment.<br>
+            Ship.
+          </h1>
+          <p class="hero-sub reveal" style="transition-delay:120ms">
+            I build <strong>real-world web applications, business systems and digital products</strong> — from architecture to production. I build, deploy and ship real products.
+          </p>
+          <div class="hero-ctas reveal" style="transition-delay:180ms">
+            <a class="btn btn-primary" href="#contact">Start a project <span class="arr">→</span></a>
+            <a class="btn btn-ghost" href="#work">Explore my work <span class="arr">↗</span></a>
+          </div>
+          <div class="availability reveal" style="transition-delay:240ms" aria-label="Availability"><span class="dot" aria-hidden="true"></span> Available for freelance — let's talk</div>
         </div>
-        <div class="availability reveal" style="transition-delay:240ms" aria-label="Availability"><span class="dot" aria-hidden="true"></span> Available for freelance — let's talk</div>
+        <figure class="hero-photo reveal" style="transition-delay:260ms">
+          <img src="assets/img/portrait.png" alt="Edwin — Full-Stack Developer" width="460" height="542" decoding="async" fetchpriority="high">
+        </figure>
         <div class="hero-rule reveal" style="transition-delay:280ms"></div>
       </div>
     </section>
