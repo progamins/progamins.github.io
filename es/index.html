@@ -204,6 +204,15 @@
   .chip-stack i{background:var(--cyan)}
   .chip-server{bottom:14%;left:-5%}
   .chip-server i{background:#3C873A}
+  .hero-chip{transition:opacity .24s var(--ease),transform .24s var(--ease)}
+  .hero-chip.swap-out{opacity:0;transform:translateY(-5px)}
+  .hero-chip.swap-in{opacity:0;transform:translateY(5px);transition:none}
+  .hero-path .path-caret{display:inline-block;width:7px;height:10px;margin-left:3px;vertical-align:-1px;background:var(--muted);opacity:0}
+  .hero-window.js-anim .path-caret{opacity:1;animation:caretBlink 1.1s steps(1) infinite}
+  @keyframes caretBlink{0%,55%{opacity:1}56%,100%{opacity:0}}
+  .hero-statusbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 14px;background:color-mix(in srgb,var(--bg-soft) 40%,var(--bg-elev));border-top:1px solid var(--line);font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;color:var(--dim)}
+  .hero-statusbar .branch{display:inline-flex;align-items:center;gap:6px;color:var(--muted)}
+  .hero-statusbar .branch i{width:6px;height:6px;border-radius:50%;background:#34D399;flex:none}
   @keyframes photoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
   @media(prefers-reduced-motion:reduce){.hero-window{animation:none}}
   .hero-rule{grid-column:1/-1}
@@ -453,15 +462,19 @@
           <div class="hero-window">
             <div class="hero-titlebar" aria-hidden="true">
               <div class="hero-dots"><span></span><span></span><span></span></div>
-              <span class="hero-path">~/edwin.png</span>
+              <span class="hero-path"><span class="path-text">~/edwin.png</span><span class="path-caret"></span></span>
               <span class="hero-spacer"></span>
             </div>
             <div class="hero-frame">
               <img src="../assets/img/portrait.png" alt="Edwin — Desarrollador Full-Stack" width="460" height="542" decoding="async" fetchpriority="high">
             </div>
+            <div class="hero-statusbar" aria-hidden="true">
+              <span class="branch"><i></i>main</span>
+              <span>UTF-8 · LF</span>
+            </div>
           </div>
-          <div class="hero-chip chip-stack" aria-hidden="true"><i></i>React · TypeScript</div>
-          <div class="hero-chip chip-server" aria-hidden="true"><i></i>Node.js · MySQL</div>
+          <div class="hero-chip chip-stack" aria-hidden="true"><i></i><span>React · TypeScript</span></div>
+          <div class="hero-chip chip-server" aria-hidden="true"><i></i><span>Node.js · MySQL</span></div>
         </figure>
         <div class="hero-rule reveal" style="transition-delay:280ms"></div>
       </div>
@@ -844,6 +857,43 @@
       reveals.forEach(function(el){ io.observe(el); });
     } else {
       reveals.forEach(function(el){ el.classList.add("in"); });
+    }
+    // Hero window — typed path + rotating stack chips
+    var win=$(".hero-window");
+    if(win && !REDUCED){
+      win.classList.add("js-anim");
+      var pathText=$(".path-text",win);
+      if(pathText){
+        var full=pathText.textContent, ci=0;
+        pathText.textContent="";
+        setTimeout(function(){
+          var t=setInterval(function(){
+            pathText.textContent=full.slice(0,++ci);
+            if(ci>=full.length) clearInterval(t);
+          },60);
+        },900);
+      }
+      var chipEls=$$(".hero-chip",win.parentElement), pools=[
+        ["React · TypeScript","React · JavaScript","HTML · CSS · JS"],
+        ["Node.js · Express","MySQL · PostgreSQL","Python · MongoDB","PHP · MySQL"]
+      ];
+      chipEls.forEach(function(chip,i){
+        var label=$("span",chip); if(!label) return;
+        var pi=0;
+        setTimeout(function(){
+          setInterval(function(){
+            if(document.visibilityState!=="visible") return;
+            pi=(pi+1)%pools[i].length;
+            chip.classList.add("swap-out");
+            setTimeout(function(){
+              label.textContent=pools[i][pi];
+              chip.classList.add("swap-in");
+              void chip.offsetWidth;
+              chip.classList.remove("swap-out","swap-in");
+            },260);
+          },5000);
+        },i*2500);
+      });
     }
   })();
   </script>
