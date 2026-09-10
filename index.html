@@ -313,6 +313,20 @@
   .svc-price strong{color:var(--text);font-weight:600}
   .svc a.link{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;gap:6px}
 
+  /* Ready-to-launch products */
+  .products-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px}
+  @media(max-width:860px){.products-grid{grid-template-columns:1fr}}
+  .prod{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--bg-elev);overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s,transform .25s var(--ease)}
+  .prod:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+  .prod-shot{position:relative;border-bottom:1px solid var(--line);aspect-ratio:16/9;overflow:hidden}
+  .prod-shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+  .prod-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .prod-body h3{font-family:var(--font-display);font-weight:700;font-size:1.08rem;letter-spacing:-.01em}
+  .prod-body>p{color:var(--muted);font-size:.9rem;line-height:1.6;flex:1}
+  .prod-tags{display:flex;flex-wrap:wrap;gap:6px}
+  .prod-tags span{font-family:var(--font-mono);font-size:.62rem;padding:4px 8px;border:1px solid var(--line);border-radius:var(--r-pill);color:var(--muted);background:var(--bg-soft)}
+  .prod-badge{position:absolute;top:10px;left:10px;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--bg);background:var(--text);padding:4px 8px;border-radius:6px}
+
   /* How I Work */
   .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
   @media(max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}}
@@ -674,6 +688,38 @@
             <h3>Need something else?</h3>
             <p>Tell me the problem, not the stack. I propose architecture, timeline and price — then we ship.</p>
             <p class="svc-price"><a class="link" href="#contact">Start a project →</a></p>
+          </article>
+        </div>
+
+        <h3 class="sec-title reveal" style="font-size:clamp(1.2rem,2.4vw,1.6rem);margin-top:44px">Ready to launch — licensed products, running in production.</h3>
+        <p class="sec-desc reveal">Not a prototype: real systems with real users. Buy a license, I install and adapt them to your organization.</p>
+
+        <div class="products-grid" style="margin-top:20px">
+          <article class="prod reveal">
+            <div class="prod-shot">
+              <img src="assets/img/product-iestp-dashboard.png" alt="Academic Management System — dashboard in production" loading="lazy" decoding="async" width="1440" height="900">
+              <span class="prod-badge">In production</span>
+              <span class="cap">Academic system — admin dashboard</span>
+            </div>
+            <div class="prod-body">
+              <div class="prod-tags"><span>PHP 8</span><span>MySQL</span><span>QR attendance</span><span>PDF reports</span><span>5 roles</span></div>
+              <h3>Academic Management System</h3>
+              <p>QR attendance, schedules, grades, justifications, payments and institutional reports (PDF/Excel). Role-based access, hardened auth, install guide included. For institutes, academies and schools.</p>
+              <p class="svc-price">License from <strong>$149</strong> · with installation <strong>$299</strong> · hosted <strong>$49/mo</strong> — <a class="link" href="#contact">Request a demo →</a></p>
+            </div>
+          </article>
+          <article class="prod reveal" style="transition-delay:80ms">
+            <div class="prod-shot">
+              <img src="assets/img/product-mr-tracking.png" alt="Maison Rosas store — order tracking in production" loading="lazy" decoding="async" width="1280" height="800">
+              <span class="prod-badge">Live demo</span>
+              <span class="cap">Maison Rosas — order tracking</span>
+            </div>
+            <div class="prod-body">
+              <div class="prod-tags"><span>React</span><span>TypeScript</span><span>Node.js</span><span>MySQL</span><span>PWA</span></div>
+              <h3>White-Label Online Store</h3>
+              <p>Full e-commerce for bakeries, restaurants and shops: catalog, customization, order tracking with OTP, real-time kitchen panel and offline PWA. Your brand, deployed and configured for you.</p>
+              <p class="svc-price">Setup from <strong>$350</strong> · hosting &amp; support <strong>$25/mo</strong> — <a class="link" href="#contact">See it live →</a></p>
+            </div>
           </article>
         </div>
       </div>

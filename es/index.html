@@ -313,6 +313,20 @@
   .svc-price strong{color:var(--text);font-weight:600}
   .svc a.link{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text);display:inline-flex;align-items:center;gap:6px}
 
+  /* Ready-to-launch products */
+  .products-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px}
+  @media(max-width:860px){.products-grid{grid-template-columns:1fr}}
+  .prod{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--bg-elev);overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s,transform .25s var(--ease)}
+  .prod:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+  .prod-shot{position:relative;border-bottom:1px solid var(--line);aspect-ratio:16/9;overflow:hidden}
+  .prod-shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+  .prod-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .prod-body h3{font-family:var(--font-display);font-weight:700;font-size:1.08rem;letter-spacing:-.01em}
+  .prod-body>p{color:var(--muted);font-size:.9rem;line-height:1.6;flex:1}
+  .prod-tags{display:flex;flex-wrap:wrap;gap:6px}
+  .prod-tags span{font-family:var(--font-mono);font-size:.62rem;padding:4px 8px;border:1px solid var(--line);border-radius:var(--r-pill);color:var(--muted);background:var(--bg-soft)}
+  .prod-badge{position:absolute;top:10px;left:10px;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--bg);background:var(--text);padding:4px 8px;border-radius:6px}
+
   /* Cómo trabajo */
   .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
   @media(max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}}
@@ -674,6 +688,38 @@
             <h3>¿Necesitas algo más?</h3>
             <p>Cuéntame el problema, no el stack. Propongo arquitectura, tiempos y precio — y lo lanzamos.</p>
             <p class="svc-price"><a class="link" href="#contact">Empezar proyecto →</a></p>
+          </article>
+        </div>
+
+        <h3 class="sec-title reveal" style="font-size:clamp(1.2rem,2.4vw,1.6rem);margin-top:44px">Listos para lanzar — productos con licencia, corriendo en producción.</h3>
+        <p class="sec-desc reveal">No son prototipos: sistemas reales con usuarios reales. Compra la licencia y yo los instalo y adapto a tu organización.</p>
+
+        <div class="products-grid" style="margin-top:20px">
+          <article class="prod reveal">
+            <div class="prod-shot">
+              <img src="../assets/img/product-iestp-dashboard.png" alt="Sistema de Gestión Académica — dashboard en producción" loading="lazy" decoding="async" width="1440" height="900">
+              <span class="prod-badge">En producción</span>
+              <span class="cap">Sistema académico — panel administrativo</span>
+            </div>
+            <div class="prod-body">
+              <div class="prod-tags"><span>PHP 8</span><span>MySQL</span><span>Asistencia QR</span><span>Reportes PDF</span><span>5 roles</span></div>
+              <h3>Sistema de Gestión Académica</h3>
+              <p>Asistencia con QR, horarios, notas, justificaciones, pagos y reportes institucionales (PDF/Excel). Acceso por roles, autenticación endurecida y guía de instalación incluida. Para institutos, academias y colegios.</p>
+              <p class="svc-price">Licencia desde <strong>$149</strong> · con instalación <strong>$299</strong> · alojado <strong>$49/mes</strong> — <a class="link" href="#contact">Pedir demo →</a></p>
+            </div>
+          </article>
+          <article class="prod reveal" style="transition-delay:80ms">
+            <div class="prod-shot">
+              <img src="../assets/img/product-mr-tracking.png" alt="Tienda Maison Rosas — seguimiento de pedido en producción" loading="lazy" decoding="async" width="1280" height="800">
+              <span class="prod-badge">Demo en vivo</span>
+              <span class="cap">Maison Rosas — seguimiento de pedido</span>
+            </div>
+            <div class="prod-body">
+              <div class="prod-tags"><span>React</span><span>TypeScript</span><span>Node.js</span><span>MySQL</span><span>PWA</span></div>
+              <h3>Tienda Online White-Label</h3>
+              <p>E-commerce completo para pastelerías, restaurantes y tiendas: catálogo, personalización, seguimiento de pedidos con OTP, panel de cocina en tiempo real y PWA offline. Tu marca, desplegada y configurada por mí.</p>
+              <p class="svc-price">Setup desde <strong>$350</strong> · hosting y soporte <strong>$25/mes</strong> — <a class="link" href="#contact">Verla en vivo →</a></p>
+            </div>
           </article>
         </div>
       </div>
