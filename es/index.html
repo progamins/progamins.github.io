@@ -295,7 +295,7 @@
   .frame-bar .dots i:nth-child(2){background:#ffbd2e}
   .frame-bar .dots i:nth-child(3){background:#27c93f}
   .frame-bar .url{font-family:var(--font-mono);font-size:.64rem;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px}
-  .frame img{width:100%;aspect-ratio:16/9;object-fit:contain;object-position:center;background:var(--bg);padding:10px;display:block;filter:saturate(.97);transition:transform .35s var(--ease)}
+  .frame img{width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;object-position:center;background:var(--bg);padding:10px;display:block;filter:saturate(.97);transition:transform .35s var(--ease)}
   .cap{position:absolute;left:10px;bottom:10px;font-family:var(--font-mono);font-size:.60rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.58);backdrop-filter:blur(6px);padding:5px 8px;border-radius:6px;border:1px solid rgba(255,255,255,.14)}
   .tile{display:grid;place-items:center;aspect-ratio:16/10;border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;position:relative}
   .tile .big{font-family:var(--font-display);font-weight:800;font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-.03em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.22)}
@@ -554,15 +554,14 @@
               <div class="c-stack"><span>React</span><span>TypeScript</span><span>Express</span><span>MySQL</span><span>Docker</span><span>PWA</span></div>
               <div class="c-links">
                 <a href="https://webhermanos-client.vercel.app" target="_blank" rel="noopener">En vivo ↗</a>
-                <a class="secondary" href="https://github.com/progamins/webhermanos" target="_blank" rel="noopener">GitHub ↗</a>
               </div>
             </div>
             <div class="c-media">
               <a class="frame" href="https://webhermanos-client.vercel.app" target="_blank" rel="noopener" aria-label="Abrir Maison Rosas en vivo">
                 <div class="frame-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">webhermanos-client.vercel.app</span></div>
-                <img src="https://raw.githubusercontent.com/progamins/webhermanos/main/screenshots/home.png" alt="Maison Rosas — captura de pantalla del e-commerce de repostería artesanal peruana" loading="lazy" decoding="async" width="1280" height="800">
+                <img src="../assets/img/product-mr-tracking.png" alt="Maison Rosas — seguimiento de pedido en producción" loading="lazy" decoding="async" width="1280" height="800">
               </a>
-              <span class="cap">Maison Rosas — sitio en vivo</span>
+              <span class="cap">Maison Rosas — seguimiento en producción</span>
             </div>
           </article>
 
@@ -574,15 +573,12 @@
               <p class="c-cat">Sistema de gestión académica</p>
               <p class="c-desc">Sistema en PHP + MySQL para un instituto técnico público: asistencia con código QR anti-duplicado, horarios, unidades didácticas, justificaciones, pagos y reportes PDF institucionales — con protección CSRF, sesiones endurecidas y límite de intentos de inicio de sesión.</p>
               <div class="c-stack"><span>PHP</span><span>JavaScript</span><span>MySQL</span><span>FPDF</span><span>QR</span></div>
-              <div class="c-links">
-                <a class="secondary" href="https://github.com/progamins/iestp" target="_blank" rel="noopener">GitHub ↗</a>
-              </div>
             </div>
             <div class="c-media">
-              <a class="frame" href="https://github.com/progamins/iestp" target="_blank" rel="noopener" aria-label="Abrir repositorio de iestp">
-                <div class="frame-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">github.com/progamins/iestp</span></div>
-                <img src="https://raw.githubusercontent.com/progamins/iestp/master/screenshots/dashboard.png" alt="iestp — captura de pantalla del panel de gestión académica" loading="lazy" decoding="async" width="1280" height="800">
-              </a>
+              <div class="frame">
+                <div class="frame-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">iestp — panel académico</span></div>
+                <img src="../assets/img/product-iestp-dashboard.png" alt="iestp — captura de pantalla del panel de gestión académica" loading="lazy" decoding="async" width="1440" height="900">
+              </div>
               <span class="cap">iestp — panel académico</span>
             </div>
           </article>
@@ -595,9 +591,6 @@
               <p class="c-cat">API REST — Node.js + Express + MySQL</p>
               <p class="c-desc">API REST para la app del IESTP: datos de estudiantes, notas, unidades didácticas, horarios, justificaciones de inasistencia con subida de imágenes, códigos QR y fotos de perfil — con autenticación JWT + bcrypt, rate limiting y tests automatizados.</p>
               <div class="c-stack"><span>Node.js</span><span>Express</span><span>MySQL</span><span>JWT</span><span>bcrypt</span></div>
-              <div class="c-links">
-                <a class="secondary" href="https://github.com/progamins/proceso-nodes" target="_blank" rel="noopener">GitHub ↗</a>
-              </div>
             </div>
             <div class="c-media">
               <div class="tile" role="img" aria-label="proceso-nodes — API" style="background:linear-gradient(135deg,#0f172a 0%,#0e7490 50%,#06b6d4 100%)">
