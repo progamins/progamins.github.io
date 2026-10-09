@@ -10,7 +10,7 @@
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/docs/Web/JavaScript)
-[![License](https://img.shields.io/badge/license-not%20specified-lightgrey)](#license)
+[![License](https://img.shields.io/badge/license-MIT-22C55E?logo=mit)](#license)
 
 **[🌐 Live Site](https://progamins.github.io)** · **[🇪🇸 Versión en español](https://progamins.github.io/es/)**
 
@@ -20,7 +20,7 @@
 
 ## About
 
-This repository is the source code for my personal portfolio site — a fast, framework-free build (plain HTML/CSS/JS) that showcases real, shipped projects rather than templates. It's optimized for SEO and accessibility, and pulls live activity data from the GitHub API.
+This repository is the source code for my personal portfolio site — a fast, framework-free build (plain HTML/CSS/JS) that showcases real, shipped projects rather than templates. Each page is self-contained (inline CSS/JS, zero render-blocking assets), optimized for SEO and accessibility, with instant theme switching that respects the system preference and avoids flash-of-wrong-theme.
 
 ## Table of Contents
 
@@ -89,13 +89,31 @@ Only technologies that appear in real, shipped projects are listed here.
 ├── index.html          # EN — main portfolio page
 ├── es/index.html        # ES — translated portfolio page
 ├── chollo/index.html    # Chollo & Glam project page
-├── assets/
-│   ├── css/main.css
-│   └── js/main.js       # animations, cached GitHub API calls (10 min), i18n
+├── 404.html             # branded bilingual 404 (served by GitHub Pages)
+├── assets/img/          # portrait + project screenshots
 ├── robots.txt
 ├── sitemap.xml
+├── LICENSE              # MIT
 └── .nojekyll
 ```
+
+## Security
+
+Applied hardening (static-site scope):
+
+- **Content-Security-Policy** via `<meta>` on every page — scripts limited to `'self'` plus a SHA-256 hash of the page's own inline theme-toggle script (no `unsafe-inline` for JS). If you edit an inline `<script>`, recompute its hash and update the CSP meta:
+  ```powershell
+  # PowerShell — extract inline script and get SHA-256 (base64) for the CSP
+  $h = [Text.Encoding]::UTF8.GetBytes((([regex]::Match((Get-Content index.html -Raw), '(?s)<script>(.*?)</script>').Groups[1].Value)))
+  [Convert]::ToBase64String([Security.Cryptography.SHA256]::Create().ComputeHash($h))
+  ```
+  In bash: `sed -n '/<script>/,/<\/script>/p' index.html | sed '1d;$d' | openssl dgst -sha256 -binary | openssl base64 -A`
+- **Referrer-Policy** (`strict-origin-when-cross-origin`) on all pages.
+- All `target="_blank"` links use `rel="noopener noreferrer"`.
+- `object-src 'none'`, `base-uri 'self'`, `form-action 'self'` — no plugins, no external form posts.
+- No dead assets: every file shipped is referenced by a page.
+- GitHub Pages serves over HTTPS — make sure **Settings → Pages → Enforce HTTPS** is enabled (platform headers like HSTS can't be set from the repo).
+- The `improve-repos.sh` script never logs or stores the token; it only sends it to `api.github.com` over HTTPS.
 
 **SEO & metadata:** canonical URLs, `hreflang` alternates, Open Graph, Twitter Cards, JSON-LD (`Person`, `WebSite`, `FAQ`).
 **Design:** theme color `#0a0a0d`, fonts Syne / Inter / JetBrains Mono.
@@ -122,7 +140,7 @@ Pushes to `main` deploy automatically via **GitHub Pages** (Settings → Pages �
 
 ## License
 
-No license file is currently included in this repository, so all rights are reserved by default. If you'd like others to reuse this code, consider adding an [MIT](https://choosealicense.com/licenses/mit/) or similar license.
+Released under the [MIT License](LICENSE) — © 2026 Edwin Rosas Albines (Progamins). You may reuse this code with attribution.
 
 ---
 
