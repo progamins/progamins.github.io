@@ -34,6 +34,8 @@ declare -A DESCS=(
   ["proceso-nodes"]="API REST en Node.js y Express con MySQL: estudiantes, notas, horarios, justificaciones con imágenes y códigos QR — JWT, bcrypt, rate limiting y tests."
   ["android-login-sqlserver"]="App Android de autenticación en Java con conexión a SQL Server (jTDS / MS SQL JDBC)."
   ["aplicativo-java"]="App Android (Kotlin + Compose) de autenticación con API REST (Node.js + Express) — JWT con refresh tokens, Docker y SQLite/MySQL."
+  ["opendowload"]="OpenMedia Downloader — Descargador híbrido de medios: React + Vite en Vercel ↔ Cloudflare Tunnel ↔ Express local. yt-dlp + FFmpeg, progreso en tiempo real vía SSE, 2 descargas simultáneas."
+  ["website"]="Chollo & Glam — E-commerce SSR en Astro 7 + Tailwind CSS v4 + SQLite: tienda, carrito, checkout, panel admin con pagos, roles, moderación y banners configurables."
   ["tortas-web"]="Web de tortas y pasteles para un emprendimiento familiar — catálogo de productos y pedidos."
   ["progamins"]="Perfil de GitHub de Progamins — Full-Stack Developer. Build. Experiment. Ship."
 )
@@ -46,6 +48,8 @@ declare -A TOPICS=(
   ["proceso-nodes"]="nodejs,express,mysql,rest-api,jwt,bcrypt,rate-limiting,qrcode,tests,backend"
   ["android-login-sqlserver"]="android,java,sql-server,jtds,jdbc,authentication,mobile"
   ["aplicativo-java"]="android,kotlin,jetpack-compose,retrofit,nodejs,express,docker,mysql,sqlite,jwt,rest-api,authentication"
+  ["opendowload"]="react,typescript,vite,nodejs,express,yt-dlp,ffmpeg,cloudflare-tunnel,vercel,downloader,sse,media"
+  ["website"]="astro,tailwindcss,sqlite,ssr,ecommerce,nodejs,typescript,shop,admin-panel,peru"
   ["tortas-web"]="web,pasteleria,emprendimiento,ecommerce,catalogo"
   ["progamins"]="profile,readme,github-profile,full-stack-developer"
 )
