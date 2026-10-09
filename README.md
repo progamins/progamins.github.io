@@ -101,16 +101,11 @@ Only technologies that appear in real, shipped projects are listed here.
 
 Applied hardening (static-site scope):
 
-- **Content-Security-Policy** via `<meta>` on every page — scripts limited to `'self'` plus a SHA-256 hash of the page's own inline theme-toggle script (no `unsafe-inline` for JS). If you edit an inline `<script>`, recompute its hash and update the CSP meta:
-  ```powershell
-  # PowerShell — extract inline script and get SHA-256 (base64) for the CSP
-  $h = [Text.Encoding]::UTF8.GetBytes((([regex]::Match((Get-Content index.html -Raw), '(?s)<script>(.*?)</script>').Groups[1].Value)))
-  [Convert]::ToBase64String([Security.Cryptography.SHA256]::Create().ComputeHash($h))
-  ```
-  In bash: `sed -n '/<script>/,/<\/script>/p' index.html | sed '1d;$d' | openssl dgst -sha256 -binary | openssl base64 -A`
+- **Content-Security-Policy** via `<meta>` on every page — `script-src 'self'` (all JS lives in external, same-origin files under `assets/js/`; no inline scripts, no `unsafe-inline` for JS), `object-src 'none'`, `base-uri 'self'`, `form-action 'self'`.
+- **No fragile inline-script hashes**: page behavior JS (`home.js`, `home-es.js`, `chollo.js`) is loaded as external files, so editing JS can never break the page via CSP.
+- **`<noscript>` fallback**: `.reveal` elements are shown even if JavaScript is disabled — the page is never blank.
 - **Referrer-Policy** (`strict-origin-when-cross-origin`) on all pages.
 - All `target="_blank"` links use `rel="noopener noreferrer"`.
-- `object-src 'none'`, `base-uri 'self'`, `form-action 'self'` — no plugins, no external form posts.
 - No dead assets: every file shipped is referenced by a page.
 - GitHub Pages serves over HTTPS — make sure **Settings → Pages → Enforce HTTPS** is enabled (platform headers like HSTS can't be set from the repo).
 - The `improve-repos.sh` script never logs or stores the token; it only sends it to `api.github.com` over HTTPS.
