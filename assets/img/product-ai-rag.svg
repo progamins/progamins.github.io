@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800" role="img" aria-label="Demo del asistente IA: pregunta en lenguaje natural, respuesta con citas y productos recuperados">
+  <defs>
+    <radialGradient id="bg" cx="0.72" cy="0" r="1.1">
+      <stop offset="0" stop-color="#1f1913"/>
+      <stop offset="0.55" stop-color="#0d0b09"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#cfa764"/>
+      <stop offset="1" stop-color="#e7c98d"/>
+    </linearGradient>
+    <linearGradient id="q" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#211b13"/>
+      <stop offset="1" stop-color="#191510"/>
+    </linearGradient>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="1.2" cy="1.2" r="1.2" fill="#39322a" opacity="0.35"/>
+    </pattern>
+  </defs>
+
+  <rect width="1280" height="800" fill="url(#bg)"/>
+  <rect width="1280" height="800" fill="url(#dots)"/>
+  <rect x="0" y="0" width="1280" height="4" fill="url(#gold)"/>
+
+  <!-- Header -->
+  <text x="72" y="88" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="15" letter-spacing="4" fill="#cfa764">RETRIEVAL-AUGMENTED GENERATION · DEMO EN VIVO</text>
+  <text x="72" y="148" font-family="Georgia, 'Times New Roman', serif" font-size="44" fill="#f2ebdc">Asistente de compras <tspan fill="#cfa764">IA</tspan></text>
+  <text x="72" y="186" font-family="system-ui, Segoe UI, sans-serif" font-size="17" fill="#b5aa97">Búsqueda semántica sobre el catálogo real — embeddings + pgvector, respuestas con citas.</text>
+
+  <!-- Question bubble -->
+  <rect x="72" y="228" rx="16" width="1136" height="76" fill="url(#q)" stroke="#39322a"/>
+  <circle cx="112" cy="266" r="16" fill="#262117"/>
+  <text x="112" y="272" font-family="system-ui, sans-serif" font-size="16" fill="#cfa764" text-anchor="middle">?</text>
+  <text x="148" y="273" font-family="system-ui, Segoe UI, sans-serif" font-size="21" fill="#f2ebdc">Regalo elegante de plata para un aniversario, que no sea caro</text>
+
+  <!-- Answer bubble -->
+  <rect x="72" y="328" rx="16" width="1136" height="96" fill="#14110d" stroke="#262117"/>
+  <text x="96" y="362" font-family="ui-monospace, monospace" font-size="12" letter-spacing="3" fill="#8a8172">RESPUESTA · GEMINI-2.5-FLASH</text>
+  <text x="96" y="398" font-family="system-ui, Segoe UI, sans-serif" font-size="20" fill="#f2ebdc">¡Claro! Te sugiero: <tspan fill="#e7c98d" font-weight="700">Collar Plata Minimalista [1]</tspan> — de plata 925 con líneas</text>
+
+  <!-- Sources label -->
+  <text x="72" y="470" font-family="ui-monospace, monospace" font-size="12" letter-spacing="3" fill="#8a8172">PRODUCTOS CITADOS · PGVECTOR · SIMILITUD COSENO</text>
+
+  <!-- Source card 1 -->
+  <rect x="72" y="490" rx="14" width="368" height="180" fill="#1a1610" stroke="#262117"/>
+  <rect x="92" y="510" rx="10" width="64" height="64" fill="#262117"/>
+  <circle cx="124" cy="542" r="14" fill="none" stroke="#cfa764" stroke-width="3"/>
+  <circle cx="124" cy="542" r="5" fill="#cfa764"/>
+  <text x="172" y="528" font-family="ui-monospace, monospace" font-size="13" fill="#cfa764">[1] · SCORE 0.70</text>
+  <text x="172" y="556" font-family="system-ui, sans-serif" font-size="19" font-weight="700" fill="#f2ebdc">Collar Plata</text>
+  <text x="172" y="580" font-family="system-ui, sans-serif" font-size="19" font-weight="700" fill="#f2ebdc">Minimalista</text>
+  <text x="92" y="632" font-family="system-ui, sans-serif" font-size="18" fill="#e7c98d">S/ 27.99</text>
+  <text x="92" y="654" font-family="system-ui, sans-serif" font-size="13" fill="#8a8172">Collares · stock 25</text>
+
+  <!-- Source card 2 -->
+  <rect x="456" y="490" rx="14" width="368" height="180" fill="#1a1610" stroke="#262117"/>
+  <rect x="476" y="510" rx="10" width="64" height="64" fill="#262117"/>
+  <rect x="488" y="522" width="40" height="40" rx="8" fill="none" stroke="#cfa764" stroke-width="3"/>
+  <text x="556" y="528" font-family="ui-monospace, monospace" font-size="13" fill="#cfa764">[2] · SCORE 0.69</text>
+  <text x="556" y="556" font-family="system-ui, sans-serif" font-size="19" font-weight="700" fill="#f2ebdc">Set Regalo</text>
+  <text x="556" y="580" font-family="system-ui, sans-serif" font-size="19" font-weight="700" fill="#f2ebdc">de Joyas</text>
+  <text x="476" y="632" font-family="system-ui, sans-serif" font-size="18" fill="#e7c98d">S/ 29.99</text>
+  <text x="476" y="654" font-family="system-ui, sans-serif" font-size="13" fill="#8a8172">Sets · stock 15</text>
+
+  <!-- Source card 3 -->
+  <rect x="840" y="490" rx="14" width="368" height="180" fill="#1a1610" stroke="#262117"/>
+  <rect x="860" y="510" rx="10" width="64" height="64" fill="#262117"/>
+  <circle cx="892" cy="542" r="17" fill="none" stroke="#cfa764" stroke-width="3"/>
+  <line x1="881" y1="553" x2="903" y2="553" stroke="#cfa764" stroke-width="3"/>
+  <text x="940" y="528" font-family="ui-monospace, monospace" font-size="13" fill="#cfa764">[3] · SCORE 0.69</text>
+  <text x="940" y="556" font-family="system-ui, sans-serif" font-size="19" font-weight="700" fill="#f2ebdc">Reloj Minimalista</text>
+  <text x="940" y="580" font-family="system-ui, sans-serif" font-size="19" font-weight="700" fill="#f2ebdc">Plata</text>
+  <text x="860" y="632" font-family="system-ui, sans-serif" font-size="18" fill="#e7c98d">S/ 89.99</text>
+  <text x="860" y="654" font-family="system-ui, sans-serif" font-size="13" fill="#8a8172">Relojes · stock 25</text>
+
+  <!-- Footer pills -->
+  <line x1="72" y1="706" x2="1208" y2="706" stroke="#262117"/>
+  <rect x="72" y="726" rx="999" width="118" height="34" fill="none" stroke="#39322a"/>
+  <text x="131" y="748" font-family="ui-monospace, monospace" font-size="13" fill="#b5aa97" text-anchor="middle">FastAPI</text>
+  <rect x="198" y="726" rx="999" width="196" height="34" fill="none" stroke="#39322a"/>
+  <text x="296" y="748" font-family="ui-monospace, monospace" font-size="13" fill="#b5aa97" text-anchor="middle">Supabase pgvector</text>
+  <rect x="402" y="726" rx="999" width="130" height="34" fill="none" stroke="#39322a"/>
+  <text x="467" y="748" font-family="ui-monospace, monospace" font-size="13" fill="#b5aa97" text-anchor="middle">Gemini API</text>
+  <rect x="540" y="726" rx="999" width="112" height="34" fill="none" stroke="#39322a"/>
+  <text x="596" y="748" font-family="ui-monospace, monospace" font-size="13" fill="#b5aa97" text-anchor="middle">Vercel</text>
+  <rect x="660" y="726" rx="999" width="96" height="34" fill="none" stroke="#39322a"/>
+  <text x="708" y="748" font-family="ui-monospace, monospace" font-size="13" fill="#cfa764" text-anchor="middle">$0/mes</text>
+  <text x="1208" y="748" font-family="ui-monospace, monospace" font-size="13" fill="#8a8172" text-anchor="end">chollo-ai-rag.vercel.app</text>
+</svg>

@@ -36,6 +36,7 @@ declare -A DESCS=(
   ["aplicativo-java"]="App Android (Kotlin + Compose) de autenticación con API REST (Node.js + Express) — JWT con refresh tokens, Docker y SQLite/MySQL."
   ["opendowload"]="OpenMedia Downloader — Descargador híbrido de medios: React + Vite en Vercel ↔ Cloudflare Tunnel ↔ Express local. yt-dlp + FFmpeg, progreso en tiempo real vía SSE, 2 descargas simultáneas."
   ["website"]="Chollo & Glam — E-commerce SSR en Astro 7 + Tailwind CSS v4 + SQLite: tienda, carrito, checkout, panel admin con pagos, roles, moderación y banners configurables."
+  ["chollo-ai-rag"]="Asistente de compras con IA (RAG) — FastAPI + Supabase pgvector + Google Gemini. Búsqueda semántica y respuestas con citas sobre el catálogo real de Chollo & Glam. En producción."
   ["tortas-web"]="Web de tortas y pasteles para un emprendimiento familiar — catálogo de productos y pedidos."
   ["progamins"]="Perfil de GitHub de Progamins — Full-Stack Developer. Build. Experiment. Ship."
 )
@@ -50,6 +51,7 @@ declare -A TOPICS=(
   ["aplicativo-java"]="android,kotlin,jetpack-compose,retrofit,nodejs,express,docker,mysql,sqlite,jwt,rest-api,authentication"
   ["opendowload"]="react,typescript,vite,nodejs,express,yt-dlp,ffmpeg,cloudflare-tunnel,vercel,downloader,sse,media"
   ["website"]="astro,tailwindcss,sqlite,ssr,ecommerce,nodejs,typescript,shop,admin-panel,peru"
+  ["chollo-ai-rag"]="python,fastapi,rag,pgvector,supabase,gemini,openai,ollama,embeddings,semantic-search,llm,generative-ai,prompt-engineering,postgresql,serverless,vercel,rest-api"
   ["tortas-web"]="web,pasteleria,emprendimiento,ecommerce,catalogo"
   ["progamins"]="profile,readme,github-profile,full-stack-developer"
 )
