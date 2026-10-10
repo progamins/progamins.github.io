@@ -1,6 +1,6 @@
 /* ============================================================
-   PROGAMINS — Portafolio ES (rediseño "senior")
-   Vanilla JS · sin dependencias · solo interacción esencial
+   PROGAMINS — Portafolio ES ("Editorial Luxe")
+   Vanilla JS · animaciones de scroll · reduced-motion friendly
    ============================================================ */
 (function () {
   "use strict";
@@ -15,10 +15,49 @@
 
   /* ---------- Header: borde al hacer scroll ---------- */
   var header = $("#siteHeader");
-  function onScroll() {
+  function onHeaderScroll() {
     if (header) header.classList.toggle("on", window.scrollY > 8);
   }
+
+  /* ---------- Barra de progreso de lectura ---------- */
+  var spBar = $("#spBar");
+  function onProgress() {
+    if (!spBar) return;
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    var p = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+    spBar.style.transform = "scaleX(" + p + ")";
+  }
+
+  /* ---------- Parallax sutil en imágenes de casos ---------- */
+  var parallaxImgs = $$(".case .media img");
+  function onParallax() {
+    if (REDUCED || !parallaxImgs.length) return;
+    var vh = window.innerHeight;
+    parallaxImgs.forEach(function (img) {
+      var rect = img.parentElement.getBoundingClientRect();
+      if (rect.bottom < -60 || rect.top > vh + 60) return;
+      var center = rect.top + rect.height / 2;
+      var progress = (center - vh / 2) / (vh / 2); // -1..1
+      if (progress > 1) progress = 1; else if (progress < -1) progress = -1;
+      img.style.setProperty("--py", (progress * 13).toFixed(1) + "px");
+    });
+  }
+
+  var scrollTick = false;
+  function onScroll() {
+    onHeaderScroll();
+    onProgress();
+    if (!scrollTick) {
+      scrollTick = true;
+      requestAnimationFrame(function () {
+        onParallax();
+        scrollTick = false;
+      });
+    }
+  }
   window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onProgress);
   onScroll();
 
   /* ---------- Menú móvil (cierre garantizado) ---------- */
@@ -66,7 +105,39 @@
     sections.forEach(function (s) { spy.observe(s); });
   }
 
-  /* ---------- Reveal on scroll (respetando reduced-motion) ---------- */
+  /* ---------- Contadores animados (hero stats) ---------- */
+  function animateCount(el) {
+    var target = parseInt(el.getAttribute("data-count"), 10) || 0;
+    var suffix = el.getAttribute("data-suffix") || "";
+    var start = null, dur = 1100;
+    function tick(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  var counters = $$("[data-count]");
+  if (counters.length) {
+    if (REDUCED || !("IntersectionObserver" in window)) {
+      counters.forEach(function (el) {
+        el.textContent = (el.getAttribute("data-count") || "0") + (el.getAttribute("data-suffix") || "");
+      });
+    } else {
+      var cio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          animateCount(entry.target);
+          cio.unobserve(entry.target);
+        });
+      }, { threshold: 0.5 });
+      counters.forEach(function (el) { cio.observe(el); });
+    }
+  }
+
+  /* ---------- Reveal on scroll (con stagger via CSS) ---------- */
   var reveals = $$(".reveal");
   if ("IntersectionObserver" in window && !REDUCED) {
     var io = new IntersectionObserver(function (entries) {
