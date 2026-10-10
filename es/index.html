@@ -271,6 +271,7 @@
     .prod .badges{display:flex;gap:8px;flex-wrap:wrap}
     .prod h3{font-family:var(--font-d);font-size:1.35rem;color:#fff;font-weight:600}
     .prod p{color:var(--ink-soft);font-size:.94rem}
+    .prod img{border-radius:12px;border:1px solid rgba(255,255,255,.14);width:100%;margin-bottom:4px}
     .prod .tags{display:flex;flex-wrap:wrap;gap:6px}
     .prod .tags span{font-family:var(--font-m);font-size:.7rem;color:var(--ink-soft);border:1px solid rgba(255,255,255,.16);padding:3px 10px;border-radius:6px}
     .prod .price{margin-top:auto;padding-top:10px;font-size:.92rem;color:var(--ink-soft)}
@@ -303,8 +304,8 @@
     .contact-inner .lead{color:var(--ink-soft);max-width:560px;margin:16px auto 0}
     .contact-inner .cta{justify-content:center;margin-top:32px}
     .contact-inner .note{margin-top:20px;color:rgba(255,255,255,.5);font-size:.85rem}
-    .ink-section .btn-ghost{border-color:rgba(255,255,255,.25);color:#fff}
-    .ink-section .btn-ghost:hover{border-color:var(--gold-2);color:var(--gold-2)}
+    .ink-section .btn-ghost,.contact-inner .btn-ghost{border-color:rgba(255,255,255,.25);color:#fff}
+    .ink-section .btn-ghost:hover,.contact-inner .btn-ghost:hover{border-color:var(--gold-2);color:var(--gold-2)}
 
     /* --- footer --- */
     footer{padding:32px 0 44px}
@@ -639,6 +640,7 @@
       <div class="prod-grid">
         <div class="prod reveal">
           <div class="badges"><span class="tag live">● En producción</span><span class="tag">Sistema académico</span></div>
+          <img src="assets/img/product-iestp-dashboard.png" alt="Dashboard del Sistema de Gestión Académica en producción" loading="lazy" decoding="async" width="1280" height="800">
           <h3>Sistema de Gestión Académica</h3>
           <p>Asistencia con QR, horarios, notas, justificaciones, pagos e informes institucionales (PDF/Excel). Acceso por roles, autenticación endurecida, guía de instalación incluida. Para institutos, academias y colegios.</p>
           <div class="tags"><span>PHP 8</span><span>MySQL</span><span>QR</span><span>Reportes PDF</span><span>5 roles</span></div>
@@ -646,6 +648,7 @@
         </div>
         <div class="prod reveal">
           <div class="badges"><span class="tag live">● Demo en vivo</span><span class="tag">Tienda white-label</span></div>
+          <img src="assets/img/product-mr-tracking.png" alt="Tienda white-label — seguimiento de pedido en vivo" loading="lazy" decoding="async" width="1280" height="800">
           <h3>Tienda Online White-Label</h3>
           <p>E-commerce completo para pastelerías, restaurantes y tiendas: catálogo, personalización, seguimiento de pedidos con OTP, panel de cocina en tiempo real y PWA offline. Tu marca, desplegada y configurada.</p>
           <div class="tags"><span>React</span><span>TypeScript</span><span>Node</span><span>MySQL</span><span>PWA</span></div>
