@@ -165,6 +165,10 @@
     .hero-grid{display:grid;grid-template-columns:1fr 330px;gap:52px;align-items:start}
     @media(max-width:1020px){.hero-grid{grid-template-columns:1fr}}
     .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;box-shadow:var(--sh)}
+    .status-card .me{display:flex;align-items:center;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:4px}
+    .status-card .me img{width:88px;height:88px;border-radius:50%;object-fit:cover;border:3px solid var(--accent);flex-shrink:0}
+    .status-card .me b{font-family:var(--font-d);font-size:1.02rem;display:block;letter-spacing:-.01em}
+    .status-card .me span{color:var(--muted);font-size:.84rem}
     .status-card .row{display:flex;justify-content:space-between;align-items:center;padding:11px 2px;border-bottom:1px solid var(--line);font-size:.9rem}
     .status-card .row:last-of-type{border-bottom:0}
     .status-card .k{color:var(--muted)}
@@ -411,6 +415,10 @@
         </div>
       </div>
       <aside class="card status-card" aria-label="Estado">
+        <div class="me">
+          <img src="/assets/img/portrait.png" alt="Edwin Rosas Albines — Desarrollador Full-Stack" width="88" height="88">
+          <div><b>Edwin Rosas Albines</b><span>Full-Stack Developer</span></div>
+        </div>
         <div class="row"><span class="k">Estado</span><span class="v"><span class="dot"></span>Disponible</span></div>
         <div class="row"><span class="k">Respuesta</span><span class="v">menos de 24 horas</span></div>
         <div class="row"><span class="k">Zona horaria</span><span class="v">GMT-5 · Perú</span></div>
