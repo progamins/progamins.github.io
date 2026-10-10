@@ -277,6 +277,20 @@
     .prod .price{margin-top:auto;padding-top:10px;font-size:.92rem;color:var(--ink-soft)}
     .prod .price b{color:var(--gold-2);font-family:var(--font-d);font-size:1rem}
     .prod .price a{color:var(--gold-2);font-weight:600}
+
+    /* --- version compacta del bloque de productos --- */
+    section.tight{padding:52px 0}
+    section.tight .sec-h{margin-bottom:24px}
+    section.tight .sec-h h2{font-size:clamp(22px,3vw,28px)}
+    section.tight .sec-h p{font-size:.95rem;margin-top:8px}
+    section.tight .prod-grid{gap:14px}
+    section.tight .prod{padding:18px 18px 20px;gap:9px}
+    section.tight .prod img{max-height:205px;object-fit:cover;object-position:top}
+    section.tight .prod h3{font-size:1.08rem}
+    section.tight .prod p{font-size:.87rem}
+    section.tight .prod .tags span{font-size:.66rem;padding:2px 8px}
+    section.tight .prod .price{font-size:.83rem;padding-top:4px}
+    section.tight .prod .price b{font-size:.92rem}
     .ink-section .tag{color:var(--ink-soft);border-color:rgba(255,255,255,.2)}
     .ink-section .tag.live{color:#7BD8A8;border-color:rgba(123,216,168,.4);background:rgba(123,216,168,.08)}
 
@@ -630,8 +644,8 @@
   </section>
 
   <!-- ============ PRODUCTOS / LICENCIAS (bloque tinta) ============ -->
-  <section aria-labelledby="t-prod">
-    <div class="ink-section wrap" style="padding:64px 40px">
+  <section aria-labelledby="t-prod" class="tight">
+    <div class="ink-section wrap" style="padding:42px 34px">
       <div class="sec-h reveal">
         <p class="kick">Listos para lanzar</p>
         <h2 id="t-prod">Productos con licencia, corriendo en producción.</h2>
