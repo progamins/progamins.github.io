@@ -198,8 +198,9 @@
     .case .links a.sec{color:var(--muted);font-weight:500}
     .case .media{min-height:290px;background:var(--paper-2);border-left:1px solid var(--line);position:relative;overflow:hidden}
     .case:nth-child(even) .media{border-left:0;border-right:1px solid var(--line)}
-    .case .media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
-    .case:hover .media img{transform:scale(1.03)}
+    .case .media img{position:absolute;left:0;width:100%;height:114%;top:-7%;object-fit:cover;
+      transform:translateY(var(--py,0)) scale(var(--sc,1))}
+    .case:hover .media img{--sc:1.035}
     .case .media .bar{position:absolute;top:0;left:0;right:0;z-index:2;display:flex;align-items:center;gap:8px;
       padding:10px 14px;background:rgba(250,247,242,.9);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
     .case .media .bar i{width:9px;height:9px;border-radius:50%;background:#D8D1C4}
@@ -208,8 +209,8 @@
     .case .media .tile{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px}
     .case .media .tile b{font-family:var(--font-d);font-size:clamp(1.7rem,3vw,2.3rem);letter-spacing:-.02em;font-weight:600}
     .case .media .tile span{display:block;color:var(--gold);font-family:var(--font-m);font-size:.78rem;margin-top:10px}
-    .case .cap{position:absolute;bottom:0;left:0;right:0;padding:8px 14px;font-size:.72rem;color:var(--dim);
-      background:linear-gradient(transparent,rgba(27,26,23,.14))}
+    .case .cap{position:absolute;bottom:0;left:0;right:0;padding:40px 14px 10px;font-size:.74rem;color:#F5F1E8;
+      background:linear-gradient(transparent 8%,rgba(27,26,23,.78))}
     @media(max-width:880px){
       .case{grid-template-columns:1fr}
       .case .media{min-height:240px;border-left:0 !important;border-right:0 !important;border-bottom:1px solid var(--line)}
@@ -318,10 +319,32 @@
       .reveal{opacity:1;transform:none;transition:none}
       html{scroll-behavior:auto}
       .case:hover .media img{transform:none}
+      .sec-h .kick::before,.contact-inner .kick::before{width:28px;transition:none}
+      .case .media img{transform:none}
     }
+
+    /* --- animaciones de scroll --- */
+    .scroll-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:300;pointer-events:none}
+    .scroll-progress i{display:block;height:100%;transform-origin:0 50%;transform:scaleX(0);
+      background:linear-gradient(90deg,var(--gold-2),var(--gold))}
+
+    /* cascada: los hijos de cada grid revelan con retardo escalonado */
+    .svc-grid>.reveal:nth-child(2),.steps>.reveal:nth-child(2),.stack-rows>.reveal:nth-child(2),
+    .prod-grid>.reveal:nth-child(2){transition-delay:80ms}
+    .svc-grid>.reveal:nth-child(3),.steps>.reveal:nth-child(3),.stack-rows>.reveal:nth-child(3){transition-delay:160ms}
+    .svc-grid>.reveal:nth-child(4),.steps>.reveal:nth-child(4),.stack-rows>.reveal:nth-child(4){transition-delay:240ms}
+    .svc-grid>.reveal:nth-child(5),.steps>.reveal:nth-child(5),.stack-rows>.reveal:nth-child(5){transition-delay:320ms}
+    .svc-grid>.reveal:nth-child(6){transition-delay:400ms}
+
+    /* la regla dorada del kicker crece al entrar la seccion */
+    .sec-h .kick::before{width:0;transition:width .7s ease .15s}
+    .sec-h.in .kick::before{width:28px}
+    .contact-inner .kick::before{width:0;transition:width .7s ease .15s}
+    .contact-inner.in .kick::before{width:28px}
   </style>
 </head>
 <body>
+<div class="scroll-progress" aria-hidden="true"><i id="spBar"></i></div>
 <a class="skip" href="#main">Saltar al contenido</a>
 
 <header class="site" id="siteHeader">
@@ -365,9 +388,9 @@
           <a class="btn btn-ghost" href="#trabajo">Ver proyectos</a>
         </div>
         <div class="hero-stats">
-          <div><b>8</b><span>proyectos enviados</span></div>
-          <div><b>3+</b><span>años construyendo</span></div>
-          <div><b>20+</b><span>tecnologías usadas</span></div>
+          <div><b data-count="8">0</b><span>proyectos enviados</span></div>
+          <div><b data-count="3" data-suffix="+">0</b><span>años construyendo</span></div>
+          <div><b data-count="20" data-suffix="+">0</b><span>tecnologías usadas</span></div>
           <div><b>≤24h</b><span>tiempo de respuesta</span></div>
         </div>
       </div>
